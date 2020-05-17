@@ -1,5 +1,8 @@
 package tn.medtech.recruitmentsystemapp.ui;
-
+/*
+* This activity contains the common form that any user should pass by.
+*
+* */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;

@@ -1,5 +1,8 @@
 package tn.medtech.recruitmentsystemapp.ui;
-
+/*
+* This activity contains two buttons that allows the user to
+* register as a candidate or recruiter.
+* */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

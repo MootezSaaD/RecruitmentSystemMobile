@@ -5,7 +5,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String jwtToken;
+    private String token;
     private String userId;
 
     // For user registration and getting back the user after login
@@ -14,7 +14,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = vars[0];
-        this.jwtToken = vars[1];
+        this.token = vars[1];
     }
     // For user login
     public User(String email, String password) {
@@ -35,7 +35,7 @@ public class User {
     }
 
     public String getJwtToken() {
-        return jwtToken;
+        return token;
     }
 
     public String getUserId() {

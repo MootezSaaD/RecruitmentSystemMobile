@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
+import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -60,11 +61,19 @@ public class LoginActivity extends AppCompatActivity {
         Retrofit retrofit = retroBuilder.build();
         // Call the UserClient and get the user object for the request
         UserClient userClient = retrofit.create(UserClient.class);
+        // Perform the login request
         Call<User> call = userClient.createAccount(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
+                // Just testing
+                //Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
+                // Store the JWT in SharedPreferences
+                TokenService.init(getApplicationContext());
+                TokenService.storeToken(response.body().getJwtToken());
+                // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
+                // Redirecting to a dummy activity to test the JWT service
+                startActivity(new Intent(LoginActivity.this,DummyActivity.class));
             }
 
             @Override
