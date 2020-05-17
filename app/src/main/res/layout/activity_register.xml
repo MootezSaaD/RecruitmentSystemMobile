@@ -26,10 +26,13 @@
                 android:id="@+id/recRegisterBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register As Recruiter" />
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:text="Register As Recruiter"
+                android:textAllCaps="false"/>
 
             <Button
-                android:id="@+id/registerBtn"
+                android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -38,7 +41,7 @@
                 android:textAllCaps="false" />
 
             <TextView
-                android:id="@+id/textViewSignup"
+                android:id="@+id/textViewLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"

@@ -47,7 +47,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/passwordFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
@@ -56,7 +56,7 @@
                 android:paddingBottom="15dp" />
 
             <Button
-                android:id="@+id/registerBtn"
+                android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

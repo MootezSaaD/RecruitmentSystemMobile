@@ -23,25 +23,25 @@
 
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/emailFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="email"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:paddingBottom="15dp" />
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/passwordFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="password"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp" />
 
             <Button
-                android:id="@+id/registerBtn"
+                android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -50,7 +50,7 @@
                 android:textAllCaps="false" />
 
             <TextView
-                android:id="@+id/textViewSignup"
+                android:id="@+id/textViewLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
