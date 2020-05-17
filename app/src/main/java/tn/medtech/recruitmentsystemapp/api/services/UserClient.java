@@ -6,6 +6,6 @@ import retrofit2.http.POST;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 
 public interface UserClient {
-    @POST("register")
+    @POST("authenticate")
     Call<User> createAccount(@Body User user);
 }
