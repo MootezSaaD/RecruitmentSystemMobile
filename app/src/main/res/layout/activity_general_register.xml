@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.GeneralRegisterActivity">
 
 
     <RelativeLayout
@@ -23,20 +23,35 @@
 
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/firstNameFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp" />
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/lastNameFld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Last Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/emailFld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="password"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp" />
 
@@ -46,16 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="Login"
+                android:text="Register"
                 android:textAllCaps="false" />
-
-            <TextView
-                android:id="@+id/textViewSignup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Don't have account? Sign Up"
-                android:textAlignment="center" />
 
 
         </LinearLayout>
