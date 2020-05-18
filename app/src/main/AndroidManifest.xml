@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.DummyActivity"></activity>
+        <activity android:name=".ui.ApplicantRegisterActivity"></activity>
+        <activity android:name=".ui.RecruiterRegisterActivity" />
+        <activity android:name=".ui.DummyActivity" />
         <activity android:name=".ui.GeneralRegisterActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.LoginActivity" />

@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         registerTextView = findViewById(R.id.textViewLogin);
         loginBtn = findViewById(R.id.loginBtn);
-        emailFld = findViewById(R.id.emailFld);
-        passwordFld = findViewById(R.id.passwordFld);
+        emailFld = findViewById(R.id.loginEmailFld);
+        passwordFld = findViewById(R.id.loginPasswordFld);
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         // Call the UserClient and get the user object for the request
         UserClient userClient = retrofit.create(UserClient.class);
         // Perform the login request
-        Call<User> call = userClient.createAccount(user);
+        Call<User> call = userClient.login(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.RecruiterRegisterActivity">
 
 
     <RelativeLayout
@@ -23,39 +23,37 @@
 
 
             <EditText
-                android:id="@+id/loginEmailFld"
+                android:id="@+id/companyNameFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp" />
+                android:ems="10"
+                android:hint="Company Name"
+                 />
 
             <EditText
-                android:id="@+id/loginPasswordFld"
+                android:id="@+id/companyDescFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp" />
+                android:ems="10"
+                android:hint="Company Description"
+                 />
+
+            <EditText
+                android:id="@+id/comapnySectorFld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Company Sector"
+                 />
 
             <Button
-                android:id="@+id/loginBtn"
+                android:id="@+id/recRegisterBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="Login"
+                android:text="Register"
                 android:textAllCaps="false" />
-
-            <TextView
-                android:id="@+id/textViewLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Don't have account? Sign Up"
-                android:textAlignment="center" />
 
 
         </LinearLayout>

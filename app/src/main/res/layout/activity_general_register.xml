@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="First Name"
-                android:inputType="textPersonName" />
+                 />
 
             <EditText
                 android:id="@+id/lastNameFld"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Last Name"
-                android:inputType="textPersonName" />
+                 />
 
             <EditText
                 android:id="@+id/emailFld"
@@ -56,12 +56,12 @@
                 android:paddingBottom="15dp" />
 
             <Button
-                android:id="@+id/loginBtn"
+                android:id="@+id/nextBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="Register"
+                android:text="Next"
                 android:textAllCaps="false" />
 
 

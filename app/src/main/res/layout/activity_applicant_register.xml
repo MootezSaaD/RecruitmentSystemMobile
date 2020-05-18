@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.ApplicantRegisterActivity">
 
 
     <RelativeLayout
@@ -23,39 +23,21 @@
 
 
             <EditText
-                android:id="@+id/loginEmailFld"
+                android:id="@+id/phoneNbrFldBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp" />
-
-            <EditText
-                android:id="@+id/loginPasswordFld"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp" />
+                android:ems="10"
+                android:hint="Phone Number"
+                 />
 
             <Button
-                android:id="@+id/loginBtn"
+                android:id="@+id/applicantRegisterBtnBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="Login"
+                android:text="Register"
                 android:textAllCaps="false" />
-
-            <TextView
-                android:id="@+id/textViewLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Don't have account? Sign Up"
-                android:textAlignment="center" />
 
 
         </LinearLayout>
