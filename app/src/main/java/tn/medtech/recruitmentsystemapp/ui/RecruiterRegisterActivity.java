@@ -38,16 +38,14 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
         companyDesc = findViewById(R.id.companyDescFld);
         companySector = findViewById(R.id.comapnySectorFld);
 
-        String cname = companyName.getText().toString();
-        String cdesc = companyDesc.getText().toString();
-        String sector = companySector.getText().toString();
+
         Intent intent = getIntent();
         Recruiter recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), Recruiter.class);
-        Company recruiterCompany = new Company("Company", "Company","Company"); // For some odd reason this only accepts hardcoded values
-        recruiter.setCompany(recruiterCompany);
         finalRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Company company = new Company(companyName.getText().toString(),companyDesc.getText().toString(),companySector.getText().toString() );
+                recruiter.setCompany(company);
                 sendRegisterRequest(recruiter);
             }
         });

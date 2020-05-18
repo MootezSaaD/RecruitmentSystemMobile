@@ -1,8 +1,19 @@
 package tn.medtech.recruitmentsystemapp.api.models;
 
-public class Company {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Company implements Serializable {
+    @SerializedName("companyName")
+    @Expose
     private String name;
+    @SerializedName("companyDesc")
+    @Expose
     private String description;
+    @SerializedName("companySector")
+    @Expose
     private String sector;
 
     public Company(String name, String description, String sector) {
@@ -35,12 +46,4 @@ public class Company {
         this.sector = sector;
     }
 
-    @Override
-    public String toString() {
-        return "Company{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", sector='" + sector + '\'' +
-                '}';
-    }
 }
