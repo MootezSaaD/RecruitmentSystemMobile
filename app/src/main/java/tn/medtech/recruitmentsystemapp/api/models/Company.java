@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Company implements Serializable {
-    @SerializedName("companyName")
+    @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("companyDesc")
+    @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("companySector")
+    @SerializedName("sector")
     @Expose
     private String sector;
 

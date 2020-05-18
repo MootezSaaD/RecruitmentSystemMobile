@@ -41,13 +41,10 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Recruiter recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), Recruiter.class);
-        finalRegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Company company = new Company(companyName.getText().toString(),companyDesc.getText().toString(),companySector.getText().toString() );
-                recruiter.setCompany(company);
-                sendRegisterRequest(recruiter);
-            }
+        finalRegisterBtn.setOnClickListener(v -> {
+            Company company = new Company(companyName.getText().toString(),companyDesc.getText().toString(),companySector.getText().toString() );
+            recruiter.setCompany(company);
+            sendRegisterRequest(recruiter);
         });
 
     }
@@ -62,15 +59,15 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
         Log.d("Body", retrofit.toString());
         // Call the UserClient and get the user object for the request
         UserClient userClient = retrofit.create(UserClient.class);
-        Call<User> call = userClient.register(recruiter);
-        call.enqueue(new Callback<User>() {
+        Call<Recruiter> call = userClient.register(recruiter);
+        call.enqueue(new Callback<Recruiter>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(RecruiterRegisterActivity.this, "W", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Recruiter> call, Response<Recruiter> response) {
+                Toast.makeText(RecruiterRegisterActivity.this, "Recruiter Added !", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Recruiter> call, Throwable t) {
                 Toast.makeText(RecruiterRegisterActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
