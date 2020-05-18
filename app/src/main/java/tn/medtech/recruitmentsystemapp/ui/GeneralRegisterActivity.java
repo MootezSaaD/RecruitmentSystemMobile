@@ -24,22 +24,22 @@ public class GeneralRegisterActivity extends AppCompatActivity {
     EditText lastName;
     EditText email;
     EditText password;
-    Button nextBtn;
+    Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_register);
-        Intent intent = getIntent();
-        Log.d("ROLE =>",intent.getStringExtra("role"));
-        int role = Integer.parseInt(intent.getStringExtra("role"));
+        Bundle intent = getIntent().getExtras();
+        int role = intent.getInt("role");
         System.out.print(role);
         firstName = findViewById(R.id.firstNameFld);
         lastName = findViewById(R.id.lastNameFld);
         email = findViewById(R.id.emailFld);
         password = findViewById(R.id.passwordFld);
+        next = findViewById(R.id.nextBtn);
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(role == 1) {

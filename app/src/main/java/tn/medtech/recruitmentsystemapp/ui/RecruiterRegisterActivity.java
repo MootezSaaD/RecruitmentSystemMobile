@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,18 +33,18 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiter_registration);
-        finalRegisterBtn = findViewById(R.id.recRegisterBtn);
+        finalRegisterBtn = findViewById(R.id.finalRecRegisterBtn);
         companyName = findViewById(R.id.companyNameFld);
         companyDesc = findViewById(R.id.companyDescFld);
         companySector = findViewById(R.id.comapnySectorFld);
-        Company company = new Company(
-                companyName.getText().toString(),
-                companyDesc.getText().toString(),
-                companySector.getText().toString()
-        );
+
+        String cname = companyName.getText().toString();
+        String cdesc = companyDesc.getText().toString();
+        String sector = companySector.getText().toString();
         Intent intent = getIntent();
         Recruiter recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), Recruiter.class);
-        recruiter.setCompany(company);
+        Company recruiterCompany = new Company("Company", "Company","Company"); // For some odd reason this only accepts hardcoded values
+        recruiter.setCompany(recruiterCompany);
         finalRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +58,13 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
         Retrofit.Builder retroBuilder = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000/api/user/")
                 .addConverterFactory(GsonConverterFactory.create());
+        String gson = new Gson().toJson(recruiter);
+        Log.d("Rec", gson);
         Retrofit retrofit = retroBuilder.build();
+        Log.d("Body", retrofit.toString());
         // Call the UserClient and get the user object for the request
         UserClient userClient = retrofit.create(UserClient.class);
-        Call<User> call = userClient.login(recruiter);
+        Call<User> call = userClient.register(recruiter);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

@@ -11,4 +11,11 @@ public class Recruiter extends User {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    @Override
+    public String toString() {
+        return "Recruiter{" +
+                "company=" + company +
+                '}';
+    }
 }
