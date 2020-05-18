@@ -10,7 +10,7 @@ public class Recruiter extends User implements Serializable {
     @Expose
     private Company company;
     public Recruiter(String firstName, String lastName, String email, Company company, String... vars) {
-        super(firstName, lastName, email, vars);
+        super("Recruiter",firstName, lastName, email, vars);
         this.company = company;
     }
 

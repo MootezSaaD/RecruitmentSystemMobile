@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    @SerializedName("userType")
+    @Expose
+    String userType;
     @SerializedName("firstName")
     @Expose
     private String firstName;
@@ -22,10 +25,11 @@ public class User implements Serializable {
     private String userId;
 
     // For user registration and getting back the user after login
-    public User(String firstName, String lastName, String email, String... vars) {
+    public User(String userType, String firstName, String lastName, String email, String... vars) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.userType = userType;
         this.password = vars[0];
         this.token = vars[1];
     }
@@ -57,5 +61,9 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 }

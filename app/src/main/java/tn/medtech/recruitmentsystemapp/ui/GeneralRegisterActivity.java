@@ -45,7 +45,7 @@ public class GeneralRegisterActivity extends AppCompatActivity {
                 if(role == 1) {
                     // Create a recruiter
                     Recruiter recruiter = new Recruiter(
-                        firstName.getText().toString(),
+                            firstName.getText().toString(),
                             lastName.getText().toString(),
                             email.getText().toString(),
                             null,
