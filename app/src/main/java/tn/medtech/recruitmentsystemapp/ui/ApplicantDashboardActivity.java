@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import tn.medtech.recruitmentsystemapp.R;
 
-public class RecruiterDashboard extends AppCompatActivity {
+public class ApplicantDashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recruiter_dashboard);
+        setContentView(R.layout.activity_applicant_dashboard);
     }
 }

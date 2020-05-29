@@ -73,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                 TokenService.storeToken(response.body().getJwtToken());
                 // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
                 // Redirecting to a dummy activity to test the JWT service
-                startActivity(new Intent(LoginActivity.this,DummyActivity.class));
+                if(response.body().getUserType().equalsIgnoreCase("applicant"))
+                    startActivity(new Intent(LoginActivity.this,ApplicantDashboardActivity.class));
+                else if(response.body().getUserType().equalsIgnoreCase("recruiter"))
+                    startActivity(new Intent(LoginActivity.this,RecruiterDashboardActivity.class));
             }
 
             @Override

@@ -1,16 +1,14 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import tn.medtech.recruitmentsystemapp.R;
 
-public class ApplicantDashboard extends AppCompatActivity {
-
+public class CreateJobActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_applicant_dashboard);
+        setContentView(R.layout.activity_job_create);
     }
 }
