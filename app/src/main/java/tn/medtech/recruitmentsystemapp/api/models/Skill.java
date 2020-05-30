@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Skill implements Serializable {
+    @SerializedName("id")
+    @Expose
+    private int id;
     @SerializedName("name")
     @Expose
     private String skillName;
@@ -13,7 +16,8 @@ public class Skill implements Serializable {
     @Expose
     private String skillType;
 
-    public Skill(String skillName, String skillType) {
+    public Skill(int id, String skillName, String skillType) {
+        this.id = id;
         this.skillName = skillName;
         this.skillType = skillType;
     }
@@ -26,4 +30,24 @@ public class Skill implements Serializable {
         return skillType;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public void setSkillType(String skillType) {
+        this.skillType = skillType;
+    }
+
+    @Override
+    public String toString() {
+        return skillName +" (" +skillType+" )";
+    }
 }

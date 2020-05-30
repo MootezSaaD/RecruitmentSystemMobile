@@ -3,15 +3,23 @@ package tn.medtech.recruitmentsystemapp.ui;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,27 +37,25 @@ public class CreateJobActivity extends AppCompatActivity {
     Button startDate;
     Button endDate;
     Button domain;
-    Button skill;
     Calendar c;
     DatePickerDialog dpd;
+    ChipGroup skillsChipGroup;
+    List<Skill> skillsList;
+    AutoCompleteTextView skills;
+    // We will the store the skills to submit here
+    ArrayList<Skill> applicationSkills = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_create);
-
+        // Fetch skills
+        getSkills();
         startDate = findViewById(R.id.btnStartDate);
         endDate = findViewById(R.id.btnEndDate);
         domain = findViewById(R.id.btnDomain);
-        skill = findViewById(R.id.btnSkills);
-
-        skill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSkills();
-            }
-        });
-
+        skills = findViewById(R.id.actvSkills);
+        skillsChipGroup = findViewById(R.id.skillsChipGroup);
         domain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,9 +113,35 @@ public class CreateJobActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
-                List<Skill> skills = response.body();
-                System.out.println(skills.size());
-                skills.forEach(skill -> System.out.println(skill.getSkillName() + " Type: "+ skill.getSkillType()));
+                skillsList = response.body();
+                System.out.println(skillsList.size());
+                skillsList.forEach(skill -> System.out.println(skill.getSkillName() + " Type: "+ skill.getSkillType()));
+                // Create the array adapter
+                ArrayAdapter<Skill> arrayAdapter = new ArrayAdapter<>(CreateJobActivity.this, android.R.layout.simple_list_item_1, skillsList);
+                // Add the adapter to actv
+                skills.setAdapter(arrayAdapter);
+                // Add to the ChipGroup
+                skills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Chip skillChip = new Chip(CreateJobActivity.this);
+                        Skill skill = (Skill) parent.getItemAtPosition(position);
+                        skillChip.setText(skill.toString());
+                        skillChip.setCloseIconVisible(true);
+                        skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                skillsChipGroup.removeView(view);
+                                // Need to handle removal from applicationSkills arrayList
+                            }
+                        });
+                        skillsChipGroup.addView(skillChip);
+                        // Adding skills to the job offer's skill arrayList
+                        applicationSkills.add(skill);
+                        // Clear the actv
+                        skills.setText("");
+                    }
+                });
 
             }
 

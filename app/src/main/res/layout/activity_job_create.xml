@@ -22,14 +22,6 @@
             android:paddingRight="15dp">
 
 
-            <Button
-                android:id="@+id/btnDomain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Domain"
-                android:clickable="true" />
-
             <EditText
                 android:id="@+id/editTitle"
                 android:layout_width="match_parent"
@@ -47,28 +39,55 @@
                 android:inputType="textPersonName" />
 
             <Button
-            android:id="@+id/btnStartDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Start Date"
-            android:clickable="true" />
+                android:id="@+id/btnDomain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:hint="Domain"
+                android:text="Domain" />
+
+            <Button
+                android:id="@+id/btnStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:hint="Start Date"
+                android:text="Start Date" />
 
             <Button
                 android:id="@+id/btnEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:ems="10"
                 android:hint="End Date"
-                android:clickable="true" />
+                android:text="End Date" />
 
-            <Button
-                android:id="@+id/btnSkills"
+            <TextView
+                android:id="@+id/skillTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Skills"
-                android:clickable="true" />
+                android:text="Skills List:" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/skillsChipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
+
+            <AutoCompleteTextView
+                android:id="@+id/actvSkills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="1"
+                android:hint="Skills" />
+
+            <Button
+                android:id="@+id/addJob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Job" />
 
 
         </LinearLayout>
