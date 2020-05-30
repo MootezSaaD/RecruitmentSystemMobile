@@ -22,6 +22,14 @@
             android:paddingRight="15dp">
 
 
+            <Button
+                android:id="@+id/btnDomain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Domain"
+                android:clickable="true" />
+
             <EditText
                 android:id="@+id/editTitle"
                 android:layout_width="match_parent"
@@ -37,6 +45,30 @@
                 android:ems="10"
                 android:hint="Description"
                 android:inputType="textPersonName" />
+
+            <Button
+            android:id="@+id/btnStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Start Date"
+            android:clickable="true" />
+
+            <Button
+                android:id="@+id/btnEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="End Date"
+                android:clickable="true" />
+
+            <Button
+                android:id="@+id/btnSkills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Skills"
+                android:clickable="true" />
 
 
         </LinearLayout>

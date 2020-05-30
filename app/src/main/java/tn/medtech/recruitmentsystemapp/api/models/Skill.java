@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Skill implements Serializable {
-    @SerializedName("skillName")
+    @SerializedName("name")
     @Expose
     private String skillName;
-    @SerializedName("skillType")
+    @SerializedName("type")
     @Expose
     private String skillType;
 
