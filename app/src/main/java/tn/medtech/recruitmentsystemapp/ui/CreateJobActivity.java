@@ -1,6 +1,8 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,12 +12,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,8 +36,8 @@ import tn.medtech.recruitmentsystemapp.api.models.Domain;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.DomainService;
-import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
+import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class CreateJobActivity extends AppCompatActivity {
@@ -52,9 +54,14 @@ public class CreateJobActivity extends AppCompatActivity {
     DatePickerDialog dpd;
     ChipGroup skillsChipGroup;
     List<Skill> skillsList;
+    List<Domain> domainList;
     AutoCompleteTextView skills;
     // We will the store the skills to submit here
     ArrayList<Skill> applicationSkills = new ArrayList<>();
+    ArrayList<Domain> domains = new ArrayList<>();
+    ArrayList<String> domainNames = new ArrayList<>();
+    int domainPosition = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,7 @@ public class CreateJobActivity extends AppCompatActivity {
         setContentView(R.layout.activity_job_create);
         // Fetch skills
         getSkills();
+        getDomains();
         startDate = findViewById(R.id.btnStartDate);
         endDate = findViewById(R.id.btnEndDate);
         domain = findViewById(R.id.btnDomain);
@@ -73,8 +81,24 @@ public class CreateJobActivity extends AppCompatActivity {
         domain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDomains();
+                CharSequence[] domainsName = domainNames.toArray(new CharSequence[domainNames.size()]);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateJobActivity.this);
+                builder.setTitle("Domain")
+                        .setSingleChoiceItems(domainsName , -1, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                               domainPosition = i;
+                            }
+                        })
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                builder.create().show();
             }
+
         });
 
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +155,7 @@ public class CreateJobActivity extends AppCompatActivity {
         postJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JobOffer jobOffer = new JobOffer(jobTitle.getText().toString(), null, jobDescription.getText().toString(),
+                JobOffer jobOffer = new JobOffer(jobTitle.getText().toString(), domains.get(domainPosition), jobDescription.getText().toString(),
                         applicationStartDate, applicationEndate, applicationSkills);
                 addJobOfferRequest(jobOffer);
             }
@@ -200,8 +224,12 @@ public class CreateJobActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<Domain>> call, Response<List<Domain>> response) {
-                List<Domain> domains = response.body();
-                domains.forEach(domain -> System.out.println(domain.getDomainName()));
+                domainList = response.body();
+                domainList.forEach(domain ->{
+                    System.out.println(domain.getDomainName());
+                    domainNames.add(domain.getDomainName());
+                    domains.add(domain);
+                } );
             }
 
 
@@ -210,7 +238,6 @@ public class CreateJobActivity extends AppCompatActivity {
                 Toast.makeText(CreateJobActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public void addJobOfferRequest(JobOffer jobOffer) {
