@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JobApplication {
+public class JobOffer {
     @SerializedName("title")
     @Expose
     private String title;
@@ -18,15 +18,15 @@ public class JobApplication {
     private String description;
     @SerializedName("startDate")
     @Expose
-    private Date startDate;
+    private String startDate;
     @SerializedName("endDate")
     @Expose
-    private Date endDate;
+    private String endDate;
     @SerializedName("skills")
     @Expose
     private ArrayList<Skill> skills = new ArrayList<>();
 
-    public JobApplication(String title, Domain domain, String description, Date startDate, Date endDate, ArrayList<Skill> skills) {
+    public JobOffer(String title, Domain domain, String description, String startDate, String endDate, ArrayList<Skill> skills) {
         this.title = title;
         this.domain = domain;
         this.description = description;
@@ -59,19 +59,19 @@ public class JobApplication {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -82,4 +82,6 @@ public class JobApplication {
     public void setSkills(ArrayList<Skill> skills) {
         this.skills = skills;
     }
+
+
 }

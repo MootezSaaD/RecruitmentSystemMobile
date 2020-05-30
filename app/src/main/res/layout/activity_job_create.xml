@@ -23,7 +23,7 @@
 
 
             <EditText
-                android:id="@+id/editTitle"
+                android:id="@+id/titleFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -31,7 +31,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editDescription"
+                android:id="@+id/descFld"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -84,7 +84,7 @@
                 android:hint="Skills" />
 
             <Button
-                android:id="@+id/addJob"
+                android:id="@+id/postJobBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Post Job" />
