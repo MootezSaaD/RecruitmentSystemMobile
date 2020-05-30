@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -88,6 +89,7 @@ public class CreateJobActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                domainPosition = i;
+                               domain.setText(domains.get(domainPosition).getDomainName());
                             }
                         })
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -193,6 +195,13 @@ public class CreateJobActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 skillsChipGroup.removeView(view);
                                 // Need to handle removal from applicationSkills arrayList
+                                Iterator<Skill> iterator = applicationSkills.iterator();
+                                while (iterator.hasNext()) {
+                                    if(iterator.next().toString().toLowerCase().equals(skillChip.getText().toString().toLowerCase())) {
+                                        iterator.remove();
+                                        break;
+                                    }
+                                }
                             }
                         });
                         skillsChipGroup.addView(skillChip);
