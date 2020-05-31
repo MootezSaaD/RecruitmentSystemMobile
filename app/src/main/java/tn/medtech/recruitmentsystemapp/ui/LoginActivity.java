@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout emailFld;
     TextInputLayout passwordFld;
     Button loginBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,24 +71,28 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                // Just testing
-                //Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
-                // Store the JWT in SharedPreferences
-                TokenService.init(getApplicationContext());
-                TokenService.storeToken(response.body().getJwtToken());
-                // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
-                // Redirecting to a dummy activity to test the JWT service
-                if(response.body().getUserType().equalsIgnoreCase("applicant"))
-                    startActivity(new Intent(LoginActivity.this,ApplicantDashboardActivity.class));
-                else if(response.body().getUserType().equalsIgnoreCase("recruiter")) {
-                    startActivity(new Intent(LoginActivity.this,RecruiterDashboardActivity.class)
-                    .putExtra("recruiterObject", new Gson().toJson(
-                            new User(response.body().getFirstName(),
-                                    response.body().getLastName(),
-                                    response.body().getEmail(),
-                                    "",
-                                    response.body().getCompany())
-                    )));
+                if (response.code() == 400) {
+                    Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Just testing
+                    //Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
+                    // Store the JWT in SharedPreferences
+                    TokenService.init(getApplicationContext());
+                    TokenService.storeToken(response.body().getJwtToken());
+                    // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
+                    // Redirecting to a dummy activity to test the JWT service
+                    if (response.body().getUserType().equalsIgnoreCase("applicant"))
+                        startActivity(new Intent(LoginActivity.this, ApplicantDashboardActivity.class));
+                    else if (response.body().getUserType().equalsIgnoreCase("recruiter")) {
+                        startActivity(new Intent(LoginActivity.this, RecruiterDashboardActivity.class)
+                                .putExtra("recruiterObject", new Gson().toJson(
+                                        new User(response.body().getFirstName(),
+                                                response.body().getLastName(),
+                                                response.body().getEmail(),
+                                                "",
+                                                response.body().getCompany())
+                                )));
+                    }
                 }
             }
 
