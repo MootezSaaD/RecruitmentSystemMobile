@@ -21,24 +21,36 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/loginEmailFld"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp" />
+                android:paddingBottom="10dp"
+                android:hint="Email">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconDrawable="@drawable/ic_email"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/loginPasswordFld"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp" />
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconDrawable="@drawable/ic_lock"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/loginBtn"

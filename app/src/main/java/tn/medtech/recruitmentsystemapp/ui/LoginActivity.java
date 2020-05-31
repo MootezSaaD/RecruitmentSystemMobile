@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -26,8 +27,8 @@ import tn.medtech.recruitmentsystemapp.util.TokenService;
 public class LoginActivity extends AppCompatActivity {
 
     TextView registerTextView;
-    EditText emailFld;
-    EditText passwordFld;
+    TextInputLayout emailFld;
+    TextInputLayout passwordFld;
     Button loginBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User user = new User(
-                        emailFld.getText().toString(),
-                        passwordFld.getText().toString()
+                        emailFld.getEditText().getText().toString(),
+                        passwordFld.getEditText().getText().toString()
                 );
                 sendLoginRequest(user);
             }
