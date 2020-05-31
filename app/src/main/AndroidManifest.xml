@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.ApplicantDashboardActivity" />
         <activity android:name=".ui.RecruiterDashboardActivity" />
-        <activity android:name=".ui.CreateJobActivity" />
+        <activity android:name=".ui.CreateJobFragment" />
         <activity android:name=".ui.ApplicantRegisterActivity" />
         <activity android:name=".ui.RecruiterRegisterActivity" />
         <activity android:name=".ui.DummyActivity" />
