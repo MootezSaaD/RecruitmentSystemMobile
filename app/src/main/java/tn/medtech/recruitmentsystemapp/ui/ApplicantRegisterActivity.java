@@ -18,6 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Applicant;
+import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
 
         public class ApplicantRegisterActivity extends AppCompatActivity {
@@ -36,16 +37,16 @@ import tn.medtech.recruitmentsystemapp.api.services.UserClient;
 
 
                 Intent intent = getIntent();
-                Applicant applicant = new Gson().fromJson(intent.getStringExtra("applicantObject"), Applicant.class);
+                User applicant = new Gson().fromJson(intent.getStringExtra("applicantObject"), User.class);
                 finalRegisterBtn.setOnClickListener(v -> {
                     applicant.setPhoneNumber(phoneNumber.getText().toString());
                     sendRegisterRequest(applicant);
                 });
             }
 
-            public void sendRegisterRequest(Applicant applicant){
+            public void sendRegisterRequest(User applicant){
                 Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:3000/api/user/")
+                        .baseUrl("http://10.0.2.2:3000/api/users/")
                         .addConverterFactory(GsonConverterFactory.create());
                 String gson = new Gson().toJson(applicant);
                 Log.d("Rec", gson);
@@ -53,15 +54,15 @@ import tn.medtech.recruitmentsystemapp.api.services.UserClient;
                 Log.d("Body", retrofit.toString());
                 // Call the UserClient and get the user object for the request
                 UserClient userClient = retrofit.create(UserClient.class);
-                Call<Applicant> call = userClient.registerApplicant(applicant);
-                call.enqueue(new Callback<Applicant>() {
+                Call<User> call = userClient.registerApplicant(applicant);
+                call.enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<Applicant> call, Response<Applicant> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
                         Toast.makeText(ApplicantRegisterActivity.this, "Applicant Added !", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onFailure(Call<Applicant> call, Throwable t) {
+                    public void onFailure(Call<User> call, Throwable t) {
                         Toast.makeText(ApplicantRegisterActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
                         t.printStackTrace();
                     }

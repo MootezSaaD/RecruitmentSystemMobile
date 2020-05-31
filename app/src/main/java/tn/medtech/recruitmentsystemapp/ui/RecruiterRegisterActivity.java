@@ -40,7 +40,7 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Recruiter recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), Recruiter.class);
+        User recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), User.class);
         finalRegisterBtn.setOnClickListener(v -> {
             Company company = new Company(companyName.getText().toString(),companyDesc.getText().toString(),companySector.getText().toString() );
             recruiter.setCompany(company);
@@ -49,9 +49,9 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
 
     }
 
-    public void sendRegisterRequest(Recruiter recruiter){
+    public void sendRegisterRequest(User recruiter){
         Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/user/")
+                .baseUrl("http://10.0.2.2:3000/api/users/")
                 .addConverterFactory(GsonConverterFactory.create());
         String gson = new Gson().toJson(recruiter);
         Log.d("Rec", gson);
@@ -59,15 +59,15 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
         Log.d("Body", retrofit.toString());
         // Call the UserClient and get the user object for the request
         UserClient userClient = retrofit.create(UserClient.class);
-        Call<Recruiter> call = userClient.register(recruiter);
-        call.enqueue(new Callback<Recruiter>() {
+        Call<User> call = userClient.register(recruiter);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Recruiter> call, Response<Recruiter> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(RecruiterRegisterActivity.this, "Recruiter Added !", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<Recruiter> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(RecruiterRegisterActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }

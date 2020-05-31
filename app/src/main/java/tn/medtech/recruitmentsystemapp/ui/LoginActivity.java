@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                             new User(response.body().getFirstName(),
                                     response.body().getLastName(),
                                     response.body().getEmail(),
+                                    "",
                                     response.body().getCompany())
                     )));
                 }

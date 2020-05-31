@@ -47,19 +47,23 @@ public class User implements Serializable {
     }
 
     // Constructor for recruiter
-    public User(String firstName, String lastName, String email, Company company) {
+    public User(String firstName, String lastName, String email, String password,Company company) {
+        this.userType = "Recuriter";
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.company = company;
+        this.password = password;
     }
 
     // Constructor for applicant
-    public User(String firstName, String lastName, String email, String phoneNumber) {
+    public User(String firstName, String lastName, String email, String password,String phoneNumber) {
+        this.userType = "Applicant";
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
 
@@ -97,5 +101,45 @@ public class User implements Serializable {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

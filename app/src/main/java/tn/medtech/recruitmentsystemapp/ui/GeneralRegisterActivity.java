@@ -16,7 +16,9 @@ import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Applicant;
+import tn.medtech.recruitmentsystemapp.api.models.Company;
 import tn.medtech.recruitmentsystemapp.api.models.Recruiter;
+import tn.medtech.recruitmentsystemapp.api.models.User;
 
 public class GeneralRegisterActivity extends AppCompatActivity {
 
@@ -44,28 +46,23 @@ public class GeneralRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(role == 1) {
                     // Create a recruiter
-                    Recruiter recruiter = new Recruiter(
+                    User recruiter = new User(
                             firstName.getText().toString(),
                             lastName.getText().toString(),
                             email.getText().toString(),
-                            null,
                             password.getText().toString(),
-                            null
-                    );
+                            (Company) null);
                     Intent finalRecruiterIntent = new Intent(GeneralRegisterActivity.this, RecruiterRegisterActivity.class);
                     finalRecruiterIntent.putExtra("recruiterObject", new Gson().toJson(recruiter));
                     startActivity(finalRecruiterIntent);
 
                 } else {
                     // Create an applicant
-                    Applicant applicant = new Applicant(
-                            firstName.getText().toString(),
+                    User applicant = new User(firstName.getText().toString(),
                             lastName.getText().toString(),
                             email.getText().toString(),
-                            null,
                             password.getText().toString(),
-                            null
-                            );
+                            "");
                     Intent finalApplicantInent = new Intent(GeneralRegisterActivity.this, ApplicantRegisterActivity.class);
                     finalApplicantInent.putExtra("applicantObject", new Gson().toJson(applicant));
                     startActivity(finalApplicantInent);
