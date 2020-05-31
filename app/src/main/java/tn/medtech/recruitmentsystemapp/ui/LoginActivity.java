@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,8 +78,15 @@ public class LoginActivity extends AppCompatActivity {
                 // Redirecting to a dummy activity to test the JWT service
                 if(response.body().getUserType().equalsIgnoreCase("applicant"))
                     startActivity(new Intent(LoginActivity.this,ApplicantDashboardActivity.class));
-                else if(response.body().getUserType().equalsIgnoreCase("recruiter"))
-                    startActivity(new Intent(LoginActivity.this,RecruiterDashboardActivity.class));
+                else if(response.body().getUserType().equalsIgnoreCase("recruiter")) {
+                    startActivity(new Intent(LoginActivity.this,RecruiterDashboardActivity.class)
+                    .putExtra("recruiterObject", new Gson().toJson(
+                            new User(response.body().getFirstName(),
+                                    response.body().getLastName(),
+                                    response.body().getEmail(),
+                                    response.body().getCompany())
+                    )));
+                }
             }
 
             @Override

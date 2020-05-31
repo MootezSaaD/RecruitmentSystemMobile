@@ -11,25 +11,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Recruiter;
+import tn.medtech.recruitmentsystemapp.api.models.User;
 
 public class RecruiterDashboardActivity extends AppCompatActivity {
     Button createJobButton;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
-    Recruiter recruiter;
+    NavigationView navigationView;
+    View headerView;
+    TextView navRecruiterName;
+    TextView navRecruiterEmail;
+    User recruiter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), User.class);
         setContentView(R.layout.activity_recruiter_dashboard);
         createJobButton = findViewById(R.id.createJobButton);
-
+        Log.d("Recruiter From Dash", recruiter.toString());
         createJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +53,14 @@ public class RecruiterDashboardActivity extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        navigationView = findViewById(R.id.recNavView);
+        headerView = navigationView.getHeaderView(0);
+        navRecruiterName = headerView.findViewById(R.id.navRecName);
+        navRecruiterEmail = headerView.findViewById(R.id.navRecEmail);
+        navRecruiterName.setText(recruiter.getFirstName()+" "+recruiter.getLastName());
+        navRecruiterEmail.setText(recruiter.getEmail());
+
 
     }
 

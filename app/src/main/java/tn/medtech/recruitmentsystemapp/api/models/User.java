@@ -21,6 +21,12 @@ public class User implements Serializable {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("company")
+    @Expose
+    private Company company;
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
     private String token;
     private String userId;
 
@@ -33,11 +39,29 @@ public class User implements Serializable {
         this.password = vars[0];
         this.token = vars[1];
     }
+
     // For user login
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
+
+    // Constructor for recruiter
+    public User(String firstName, String lastName, String email, Company company) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.company = company;
+    }
+
+    // Constructor for applicant
+    public User(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -65,5 +89,13 @@ public class User implements Serializable {
 
     public String getUserType() {
         return userType;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

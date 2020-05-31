@@ -46,4 +46,12 @@ public class Company implements Serializable {
         this.sector = sector;
     }
 
+    @Override
+    public String toString() {
+        return "Company{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sector='" + sector + '\'' +
+                '}';
+    }
 }
