@@ -8,7 +8,7 @@ import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 
 public interface JobService {
     @POST("job/create")
-    Call<JobOffer> createJob();
+    Call<JobOffer> createJob(@Header("Authorization") String token, @Body JobOffer jobOffer);
 
     @POST("test")
     Call<JobOffer> testCreateJob(@Header("Authorization") String token, @Body JobOffer jobOffer);

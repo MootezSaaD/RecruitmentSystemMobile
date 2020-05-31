@@ -12,7 +12,7 @@ public class JobOffer {
     private String title;
     @SerializedName("domain")
     @Expose
-    private Domain domain;
+    private String domain;
     @SerializedName("description")
     @Expose
     private String description;
@@ -26,7 +26,7 @@ public class JobOffer {
     @Expose
     private ArrayList<Skill> skills = new ArrayList<>();
 
-    public JobOffer(String title, Domain domain, String description, String startDate, String endDate, ArrayList<Skill> skills) {
+    public JobOffer(String title, String domain, String description, String startDate, String endDate, ArrayList<Skill> skills) {
         this.title = title;
         this.domain = domain;
         this.description = description;
@@ -43,11 +43,11 @@ public class JobOffer {
         this.title = title;
     }
 
-    public Domain getDomain() {
+    public String getDomain() {
         return domain;
     }
 
-    public void setDomain(Domain domain) {
+    public void setDomain(String domain) {
         this.domain = domain;
     }
 

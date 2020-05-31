@@ -157,7 +157,7 @@ public class CreateJobActivity extends AppCompatActivity {
         postJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JobOffer jobOffer = new JobOffer(jobTitle.getText().toString(), domains.get(domainPosition), jobDescription.getText().toString(),
+                JobOffer jobOffer = new JobOffer(jobTitle.getText().toString(), domains.get(domainPosition).getDomainName(), jobDescription.getText().toString(),
                         applicationStartDate, applicationEndate, applicationSkills);
                 addJobOfferRequest(jobOffer);
             }
@@ -252,11 +252,11 @@ public class CreateJobActivity extends AppCompatActivity {
     public void addJobOfferRequest(JobOffer jobOffer) {
         // Usual drill..
         Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/job/")
+                .baseUrl("http://10.0.2.2:3000/api/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = retroBuilder.build();
         JobService jobService = retrofit.create(JobService.class);
-        Call<JobOffer> call = jobService.testCreateJob("Bearer " + TokenService.getToken(),jobOffer);
+        Call<JobOffer> call = jobService.createJob("Bearer " + TokenService.getToken(),jobOffer);
         // FOR TESTING PURPOSES
         String gson = new Gson().toJson(jobOffer);
         Log.d("Rec", gson);
