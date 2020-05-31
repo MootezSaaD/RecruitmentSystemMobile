@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private void sendLoginRequest(User user) {
         // Start by creating the Retrofit instance
         Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/user/")
+                .baseUrl("http://10.0.2.2:3000/api/users/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = retroBuilder.build();
         // Call the UserClient and get the user object for the request

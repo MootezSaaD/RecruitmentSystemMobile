@@ -7,7 +7,7 @@ import retrofit2.http.POST;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 
 public interface JobService {
-    @POST("job/create")
+    @POST("jobs/create")
     Call<JobOffer> createJob(@Header("Authorization") String token, @Body JobOffer jobOffer);
 
     @POST("test")
