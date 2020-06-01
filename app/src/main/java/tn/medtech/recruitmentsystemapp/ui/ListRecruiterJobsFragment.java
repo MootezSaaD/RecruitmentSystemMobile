@@ -33,7 +33,12 @@ public class ListRecruiterJobsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ArrayList<JobOffer> exampleList = new ArrayList<>();
-        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "nill", new ArrayList<Skill>()));
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        skills.add(new Skill(1,"Python","Required"));
+        skills.add(new Skill(2,"R","Preferred"));
+        skills.add(new Skill(3,"Mathematics","Required"));
+        skills.add(new Skill(4,"ML","Required"));
+        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "nill", skills));
         recyclerView = getView().findViewById(R.id.recListJobsRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
