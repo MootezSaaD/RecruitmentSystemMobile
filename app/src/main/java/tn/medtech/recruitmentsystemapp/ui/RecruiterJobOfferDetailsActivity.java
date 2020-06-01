@@ -25,6 +25,7 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         JobOffer jobOffer = new Gson().fromJson(intent.getStringExtra("jobOfferObject"), JobOffer.class);
+        setTitle(jobOffer.getTitle());
         title = findViewById(R.id.recJobTitle);
         company = findViewById(R.id.recJobCompany);
 
