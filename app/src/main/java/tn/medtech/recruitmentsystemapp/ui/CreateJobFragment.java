@@ -1,7 +1,6 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,11 +19,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,20 +38,17 @@ import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.DomainService;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
+import tn.medtech.recruitmentsystemapp.util.DatePickerUniversal;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class CreateJobFragment extends Fragment {
 
-    Button startDate;
-    Button endDate;
+    TextInputEditText startDate;
+    TextInputEditText endDate;
     Button postJob;
-    EditText jobTitle;
-    EditText jobDescription;
-    String applicationStartDate = "";
-    String applicationEndate = "";
+    TextInputEditText jobTitle;
+    TextInputEditText jobDescription;
     Button domain;
-    Calendar c;
-    DatePickerDialog dpd;
     ChipGroup skillsChipGroup;
     List<Skill> skillsList;
     List<Domain> domainList;
@@ -80,14 +73,18 @@ public class CreateJobFragment extends Fragment {
         getSkills();
         getDomains();
         View v = getView();
-        startDate = v.findViewById(R.id.btnStartDate);
-        endDate = v.findViewById(R.id.btnEndDate);
+        startDate = v.findViewById(R.id.startDateFld);
+        endDate = v.findViewById(R.id.endDateFld);
         domain = v.findViewById(R.id.btnDomain);
         skills = v.findViewById(R.id.actvSkills);
         skillsChipGroup = v.findViewById(R.id.skillsChipGroup);
         postJob = v.findViewById(R.id.postJobBtn);
         jobTitle = v.findViewById(R.id.titleFld);
         jobDescription = v.findViewById(R.id.descFld);
+
+        DatePickerUniversal startDateDPU = new DatePickerUniversal(startDate, "yyyy-MM-dd", 0);
+        DatePickerUniversal endDateDPU = new DatePickerUniversal(endDate, "yyyy-MM-dd", 1);
+
         domain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,62 +109,11 @@ public class CreateJobFragment extends Fragment {
 
         });
 
-        startDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                c = Calendar.getInstance();
-                c.setTimeInMillis(System.currentTimeMillis());
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year1, int month1, int day1) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.YEAR, year1);
-                        calendar.set(Calendar.MONTH, month1);
-                        calendar.set(Calendar.DAY_OF_MONTH, day1);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        applicationStartDate = simpleDateFormat.format(calendar.getTime());
-                        startDate.setText(year1 + "-" + (month1 + 1) + "-" + day1);
-
-                    }
-                }, year, month, day);
-                dpd.show();
-            }
-        });
-
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                c = Calendar.getInstance();
-                c.setTimeInMillis(System.currentTimeMillis());
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year1, int month1, int day1) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.YEAR, year1);
-                        calendar.set(Calendar.MONTH, month1);
-                        calendar.set(Calendar.DAY_OF_MONTH, day1);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        applicationEndate = simpleDateFormat.format(calendar.getTime());
-                        endDate.setText(year1 + "-" + (month1 + 1) + "-" + day1);
-                    }
-                }, year, month, day);
-                dpd.show();
-            }
-        });
-
         postJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 JobOffer jobOffer = new JobOffer(jobTitle.getText().toString(), domains.get(domainPosition).getDomainName(), jobDescription.getText().toString(),
-                        applicationStartDate, applicationEndate, applicationSkills);
+                        startDate.getText().toString(), startDate.getText().toString(), applicationSkills);
                 addJobOfferRequest(jobOffer);
             }
         });
@@ -206,7 +152,7 @@ public class CreateJobFragment extends Fragment {
                                 // Need to handle removal from applicationSkills arrayList
                                 Iterator<Skill> iterator = applicationSkills.iterator();
                                 while (iterator.hasNext()) {
-                                    if(iterator.next().toString().toLowerCase().equals(skillChip.getText().toString().toLowerCase())) {
+                                    if (iterator.next().toString().toLowerCase().equals(skillChip.getText().toString().toLowerCase())) {
                                         iterator.remove();
                                         break;
                                     }
@@ -243,11 +189,11 @@ public class CreateJobFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Domain>> call, Response<List<Domain>> response) {
                 domainList = response.body();
-                domainList.forEach(domain ->{
+                domainList.forEach(domain -> {
                     System.out.println(domain.getDomainName());
                     domainNames.add(domain.getDomainName());
                     domains.add(domain);
-                } );
+                });
             }
 
 
@@ -265,7 +211,7 @@ public class CreateJobFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = retroBuilder.build();
         JobService jobService = retrofit.create(JobService.class);
-        Call<JobOffer> call = jobService.createJob("Bearer " + TokenService.getToken(),jobOffer);
+        Call<JobOffer> call = jobService.createJob("Bearer " + TokenService.getToken(), jobOffer);
         // FOR TESTING PURPOSES
         String gson = new Gson().toJson(jobOffer);
         Log.d("Rec", gson);

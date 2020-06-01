@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -23,7 +24,7 @@ import tn.medtech.recruitmentsystemapp.api.services.UserClient;
 
         public class ApplicantRegisterActivity extends AppCompatActivity {
 
-            EditText phoneNumber;
+            TextInputLayout phoneNumber;
             Button finalRegisterBtn;
 
             @Override
@@ -39,7 +40,7 @@ import tn.medtech.recruitmentsystemapp.api.services.UserClient;
                 Intent intent = getIntent();
                 User applicant = new Gson().fromJson(intent.getStringExtra("applicantObject"), User.class);
                 finalRegisterBtn.setOnClickListener(v -> {
-                    applicant.setPhoneNumber(phoneNumber.getText().toString());
+                    applicant.setPhoneNumber(phoneNumber.getEditText().getText().toString());
                     sendRegisterRequest(applicant);
                 });
             }

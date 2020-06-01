@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -21,22 +20,74 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-
-            <EditText
-                android:id="@+id/titleFld"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:hint="Title"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                app:startIconDrawable="@drawable/ic_rate_review">
 
-            <EditText
-                android:id="@+id/descFld"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleFld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:hint="Description"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                app:startIconDrawable="@drawable/ic_description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descFld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5px"
+                    android:layout_weight="1"
+                    android:hint="Start Date"
+                    app:startIconDrawable="@drawable/ic_date_range">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/startDateFld"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    android:hint="End Date"
+                    app:startIconDrawable="@drawable/ic_date_range">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/endDateFld"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnDomain"
@@ -45,25 +96,8 @@
                 android:clickable="true"
                 android:ems="10"
                 android:hint="Domain"
+                android:layout_marginBottom="10dp"
                 android:text="Domain" />
-
-            <Button
-                android:id="@+id/btnStartDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:ems="10"
-                android:hint="Start Date"
-                android:text="Start Date" />
-
-            <Button
-                android:id="@+id/btnEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:ems="10"
-                android:hint="End Date"
-                android:text="End Date" />
 
             <TextView
                 android:id="@+id/skillTxtView"
@@ -74,14 +108,15 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/skillsChipGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
+                android:layout_height="wrap_content" />
 
             <AutoCompleteTextView
                 android:id="@+id/actvSkills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:completionThreshold="1"
-                android:hint="Skills" />
+                android:hint="Skills"
+                android:layout_marginBottom="10dp" />
 
             <Button
                 android:id="@+id/postJobBtn"

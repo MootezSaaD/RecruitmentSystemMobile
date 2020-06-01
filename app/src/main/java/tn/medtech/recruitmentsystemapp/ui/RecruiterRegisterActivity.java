@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -25,9 +26,9 @@ import tn.medtech.recruitmentsystemapp.api.services.UserClient;
 
 public class RecruiterRegisterActivity extends AppCompatActivity {
 
-    EditText companyName;
-    EditText companyDesc;
-    EditText companySector;
+    TextInputLayout companyName;
+    TextInputLayout companyDesc;
+    TextInputLayout companySector;
     Button finalRegisterBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class RecruiterRegisterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         User recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), User.class);
         finalRegisterBtn.setOnClickListener(v -> {
-            Company company = new Company(companyName.getText().toString(),companyDesc.getText().toString(),companySector.getText().toString() );
+            Company company = new Company(companyName.getEditText().getText().toString(),companyDesc.getEditText().getText().toString(),companySector.getEditText().getText().toString() );
             recruiter.setCompany(company);
             sendRegisterRequest(recruiter);
         });

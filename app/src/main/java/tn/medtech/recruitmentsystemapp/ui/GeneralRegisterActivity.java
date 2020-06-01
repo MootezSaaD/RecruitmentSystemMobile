@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
@@ -22,10 +23,10 @@ import tn.medtech.recruitmentsystemapp.api.models.User;
 
 public class GeneralRegisterActivity extends AppCompatActivity {
 
-    EditText firstName;
-    EditText lastName;
-    EditText email;
-    EditText password;
+    TextInputLayout firstName;
+    TextInputLayout lastName;
+    TextInputLayout email;
+    TextInputLayout password;
     Button next;
 
     @Override
@@ -47,10 +48,10 @@ public class GeneralRegisterActivity extends AppCompatActivity {
                 if(role == 1) {
                     // Create a recruiter
                     User recruiter = new User(
-                            firstName.getText().toString(),
-                            lastName.getText().toString(),
-                            email.getText().toString(),
-                            password.getText().toString(),
+                            firstName.getEditText().getText().toString(),
+                            lastName.getEditText().getText().toString(),
+                            email.getEditText().getText().toString(),
+                            password.getEditText().getText().toString(),
                             (Company) null);
                     Intent finalRecruiterIntent = new Intent(GeneralRegisterActivity.this, RecruiterRegisterActivity.class);
                     finalRecruiterIntent.putExtra("recruiterObject", new Gson().toJson(recruiter));
@@ -58,10 +59,10 @@ public class GeneralRegisterActivity extends AppCompatActivity {
 
                 } else {
                     // Create an applicant
-                    User applicant = new User(firstName.getText().toString(),
-                            lastName.getText().toString(),
-                            email.getText().toString(),
-                            password.getText().toString(),
+                    User applicant = new User(firstName.getEditText().getText().toString(),
+                            lastName.getEditText().getText().toString(),
+                            email.getEditText().getText().toString(),
+                            password.getEditText().getText().toString(),
                             "");
                     Intent finalApplicantInent = new Intent(GeneralRegisterActivity.this, ApplicantRegisterActivity.class);
                     finalApplicantInent.putExtra("applicantObject", new Gson().toJson(applicant));
