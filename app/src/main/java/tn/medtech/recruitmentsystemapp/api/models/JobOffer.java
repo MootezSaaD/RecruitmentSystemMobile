@@ -25,6 +25,8 @@ public class JobOffer {
     @SerializedName("skills")
     @Expose
     private ArrayList<Skill> skills = new ArrayList<>();
+    @SerializedName("Company")
+    private String company;
 
     public JobOffer(String title, String domain, String description, String startDate, String endDate, ArrayList<Skill> skills) {
         this.title = title;
@@ -33,6 +35,16 @@ public class JobOffer {
         this.startDate = startDate;
         this.endDate = endDate;
         this.skills = skills;
+    }
+
+    public JobOffer(String title, String domain, String description, String company,String startDate, String endDate, ArrayList<Skill> skills) {
+        this.title = title;
+        this.domain = domain;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.skills = skills;
+        this.company = company;
     }
 
     public String getTitle() {
@@ -83,5 +95,11 @@ public class JobOffer {
         this.skills = skills;
     }
 
+    public String getCompany() {
+        return company;
+    }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
 }

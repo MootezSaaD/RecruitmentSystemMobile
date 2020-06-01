@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import tn.medtech.recruitmentsystemapp.R;
+import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
+import tn.medtech.recruitmentsystemapp.api.models.Skill;
 
 public class ListRecruiterJobsFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -30,10 +32,8 @@ public class ListRecruiterJobsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<RecruiterJobItem> exampleList = new ArrayList<>();
-        exampleList.add(new RecruiterJobItem("Data Scientist","Facebook","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        exampleList.add(new RecruiterJobItem("Python Developer","Nejib","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
-        exampleList.add(new RecruiterJobItem("WebASM Senior Dev.","Marven","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
+        ArrayList<JobOffer> exampleList = new ArrayList<>();
+        exampleList.add(new JobOffer("Senior Web Dev.","Web Development","Description","Facebook", "nill", "nill",new ArrayList<Skill>()));
         recyclerView =  getView().findViewById(R.id.recListJobsRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());

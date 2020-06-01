@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import tn.medtech.recruitmentsystemapp.R;
+import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 
 public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobItemAdapter.RecruiterJobViewHolder> {
-    private ArrayList<RecruiterJobItem> list;
+    private ArrayList<JobOffer> list;
 
     public static class RecruiterJobViewHolder extends RecyclerView.ViewHolder {
         public TextView jobTitleTextView;
@@ -26,7 +27,7 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
         }
     }
 
-    public RecruiterJobItemAdapter(ArrayList<RecruiterJobItem> list) {
+    public RecruiterJobItemAdapter(ArrayList<JobOffer> list) {
         this.list = list;
     }
 
@@ -41,9 +42,9 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
     // This binds the values to the view
     @Override
     public void onBindViewHolder(@NonNull RecruiterJobViewHolder holder, int position) {
-        RecruiterJobItem currentItem = this.list.get(position);
-        holder.jobTitleTextView.setText(currentItem.getJobTitle());
-        holder.jobCompanyTextView.setText(currentItem.getJobCompany());
+        JobOffer currentItem = this.list.get(position);
+        holder.jobTitleTextView.setText(currentItem.getTitle());
+        holder.jobCompanyTextView.setText(currentItem.getCompany());
     }
 
     @Override
