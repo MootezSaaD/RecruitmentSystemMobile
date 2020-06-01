@@ -2,4 +2,7 @@
     <string name="app_name">RecruitmentSystemApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="recruiter_job_card_title">Title</string>
+    <string name="recruiter_job_card_company">Company</string>
+    <string name="recruiter_job_card_desc">Description</string>
 </resources>

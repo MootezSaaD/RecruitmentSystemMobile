@@ -63,12 +63,14 @@ public class CreateJobFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("Add Job Offer");
         return inflater.inflate(R.layout.fragment_job_create, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         // Fetch skills
         getSkills();
         getDomains();
