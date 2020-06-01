@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.RecruiterJobOfferDetailsActivity"></activity>
-        <activity android:name=".ui.ApplicantDashboardActivity" />
+        <activity android:name=".ui.ApplicantDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
 <!--        Remove Action bar for the RecruiterDashBoardActivity-->
         <activity android:name=".ui.RecruiterDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.CreateJobFragment" />

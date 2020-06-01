@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:strokeWidth="1dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/appJobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recruiter_job_card_title"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:id="@+id/appJobCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/recruiter_job_card_company"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/appJobDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domain:"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/appJobDomain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domain:"
+                android:textAppearance="?attr/textAppearanceBody2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skills:"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/appJobSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skills:"
+                android:textAppearance="?attr/textAppearanceBody2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deadline:"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/appJobEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deadline:"
+                android:textAppearance="?attr/textAppearanceBody2" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

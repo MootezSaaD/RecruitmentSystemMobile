@@ -73,7 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                     // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
                     // Redirecting to a dummy activity to test the JWT service
                     if (response.body().getUserType().equalsIgnoreCase("applicant"))
-                        startActivity(new Intent(LoginActivity.this, ApplicantDashboardActivity.class));
+                        startActivity(new Intent(LoginActivity.this, ApplicantDashboardActivity.class)
+                                .putExtra("applicantObject", new Gson().toJson(
+                                        new User(response.body().getFirstName(),
+                                                response.body().getLastName(),
+                                                response.body().getEmail(),
+                                                "",
+                                                response.body().getPhoneNumber())
+                                )));
                     else if (response.body().getUserType().equalsIgnoreCase("recruiter")) {
                         startActivity(new Intent(LoginActivity.this, RecruiterDashboardActivity.class)
                                 .putExtra("recruiterObject", new Gson().toJson(

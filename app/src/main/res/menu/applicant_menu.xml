@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/appNavJobs"
+            android:icon="@drawable/ic_list"
+            android:title="Jobs" />
+        <item
+            android:id="@+id/appNavApplications"
+            android:icon="@drawable/ic_list"
+            android:title="My applications" />
+        <item
+            android:id="@+id/appNavProfile"
+            android:icon="@drawable/ic_person"
+            android:title="My profile" />
+    </group>
+</menu>
