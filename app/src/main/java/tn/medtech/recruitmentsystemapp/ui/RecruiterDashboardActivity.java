@@ -1,12 +1,5 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -50,10 +50,10 @@ public class RecruiterDashboardActivity extends AppCompatActivity {
         headerView = navigationView.getHeaderView(0);
         navRecruiterName = headerView.findViewById(R.id.navRecName);
         navRecruiterEmail = headerView.findViewById(R.id.navRecEmail);
-        navRecruiterName.setText(recruiter.getFirstName()+" "+recruiter.getLastName());
+        navRecruiterName.setText(recruiter.getFirstName() + " " + recruiter.getLastName());
         navRecruiterEmail.setText(recruiter.getEmail());
 
-        if(savedInstanceState == null ) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new ListRecruiterJobsFragment()).commit();
             navigationView.setCheckedItem(R.id.recNavList);
         }
@@ -79,7 +79,7 @@ public class RecruiterDashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();

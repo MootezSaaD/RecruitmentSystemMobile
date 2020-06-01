@@ -26,15 +26,15 @@ public class ListRecruiterJobsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job Offers List");
-        return inflater.inflate(R.layout.fragment_list_recruiter_jobs,container, false);
+        return inflater.inflate(R.layout.fragment_list_recruiter_jobs, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ArrayList<JobOffer> exampleList = new ArrayList<>();
-        exampleList.add(new JobOffer("Senior Web Dev.","Web Development","Description","Facebook", "nill", "nill",new ArrayList<Skill>()));
-        recyclerView =  getView().findViewById(R.id.recListJobsRecyclerView);
+        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "nill", new ArrayList<Skill>()));
+        recyclerView = getView().findViewById(R.id.recListJobsRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         adapter = new RecruiterJobItemAdapter(exampleList);

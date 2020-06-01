@@ -59,7 +59,7 @@ public class DatePickerUniversal implements View.OnFocusChangeListener, DatePick
         int year = mCalendar.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), this, year, month, day);
-        //Disable past dates
+        // Disable past dates
         if (this.minDayOffset != 0) {
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() + minDayOffset);
         } else {

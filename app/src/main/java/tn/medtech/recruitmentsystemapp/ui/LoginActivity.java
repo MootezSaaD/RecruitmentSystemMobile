@@ -1,15 +1,13 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -17,10 +15,9 @@ import com.google.gson.Gson;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
+import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
@@ -59,13 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendLoginRequest(User user) {
-        // Start by creating the Retrofit instance
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/users/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        // Call the UserClient and get the user object for the request
-        UserClient userClient = retrofit.create(UserClient.class);
+        UserClient userClient = ServiceGenerator.createService(UserClient.class);
         // Perform the login request
         Call<User> call = userClient.login(user);
         call.enqueue(new Callback<User>() {

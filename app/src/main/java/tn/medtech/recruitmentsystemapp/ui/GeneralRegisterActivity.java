@@ -1,24 +1,21 @@
 package tn.medtech.recruitmentsystemapp.ui;
 /*
-* This activity contains the common form that any user should pass by.
-*
-* */
-import androidx.appcompat.app.AppCompatActivity;
+ * This activity contains the common form that any user should pass by.
+ *
+ * */
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
-import tn.medtech.recruitmentsystemapp.api.models.Applicant;
 import tn.medtech.recruitmentsystemapp.api.models.Company;
-import tn.medtech.recruitmentsystemapp.api.models.Recruiter;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 
 public class GeneralRegisterActivity extends AppCompatActivity {
@@ -45,7 +42,7 @@ public class GeneralRegisterActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(role == 1) {
+                if (role == 1) {
                     // Create a recruiter
                     User recruiter = new User(
                             firstName.getEditText().getText().toString(),

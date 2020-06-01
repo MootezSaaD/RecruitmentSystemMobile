@@ -37,6 +37,7 @@ import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.DomainService;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
+import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
 import tn.medtech.recruitmentsystemapp.util.DatePickerUniversal;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
@@ -122,11 +123,7 @@ public class CreateJobFragment extends Fragment {
     }
 
     private void getSkills() {
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        SkillService skillService = retrofit.create(SkillService.class);
+        SkillService skillService = ServiceGenerator.createService(SkillService.class);
         Call<List<Skill>> call = skillService.getSkills("Bearer " + TokenService.getToken());
         call.enqueue(new Callback<List<Skill>>() {
 
