@@ -7,20 +7,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import tn.medtech.recruitmentsystemapp.R;
-import tn.medtech.recruitmentsystemapp.api.models.Applicant;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
+import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapter.ApplicantJobViewHolder> {
     private ArrayList<JobOffer> list;
-
 
 
     public static class ApplicantJobViewHolder extends RecyclerView.ViewHolder {
@@ -29,7 +29,7 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
         public TextView jobEndDateTextView;
         public Button viewJobButton;
 
-        public ApplicantJobViewHolder (@NonNull View itemView) {
+        public ApplicantJobViewHolder(@NonNull View itemView) {
             super(itemView);
             jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
             jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
@@ -57,7 +57,7 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
         JobOffer currentItem = this.list.get(position);
         holder.jobTitleTextView.setText(currentItem.getTitle());
         holder.jobCompanyTextView.setText(currentItem.getCompany());
-        holder.jobEndDateTextView.setText(currentItem.getEndDate());
+        holder.jobEndDateTextView.setText(DateParser.parseDate(currentItem.getEndDate()));
 
         holder.viewJobButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.google.android.material.chip.Chip;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
 
-import androidx.appcompat.app.AppCompatActivity;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
-import tn.medtech.recruitmentsystemapp.api.models.Skill;
+import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class ApplicantJobDetailActivity extends AppCompatActivity {
     TextView title;
@@ -21,6 +21,7 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
     TextView endDate;
     TextView startDate;
     ChipGroup jobSkillsChipGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +39,8 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
         title.setText(jobOffer.getTitle());
         company.setText(jobOffer.getCompany());
         description.setText(jobOffer.getDescription());
-        endDate.setText(jobOffer.getEndDate());
-        startDate.setText(jobOffer.getStartDate());
+        endDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
+        startDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
         skills.setText(jobOffer.getSkills().toString());
 
     }

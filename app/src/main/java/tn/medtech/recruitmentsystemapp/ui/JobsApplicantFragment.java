@@ -37,7 +37,6 @@ public class JobsApplicantFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Jobs List");
-        getJobs();
         return inflater.inflate(R.layout.fragment_jobs_applicant, container, false);
     }
 
@@ -46,7 +45,7 @@ public class JobsApplicantFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         jobList = new ArrayList<>(jobsRepository.findAll());
         recyclerView = getView().findViewById(R.id.jobsApplicantRecyclerView);
-        swipeContainer = getView().findViewById(R.id.swipeRecruiterJobsContainer);
+        swipeContainer = getView().findViewById(R.id.swipeApplicantJobsContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
