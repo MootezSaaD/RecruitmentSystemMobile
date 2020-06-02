@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
 
@@ -17,6 +18,7 @@ import retrofit2.Callback;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Response;
+import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.util.DateParser;
@@ -25,7 +27,6 @@ import tn.medtech.recruitmentsystemapp.util.TokenService;
 public class ApplicantJobDetailActivity extends AppCompatActivity {
     TextView title;
     TextView company;
-    TextView skills;
     TextView description;
     TextView endDate;
     TextView startDate;
@@ -41,7 +42,7 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
         JobOffer jobOffer = new Gson().fromJson(intent.getStringExtra("jobDetailsObject"), JobOffer.class);
         title = findViewById(R.id.appDetailJobTitle);
         company = findViewById(R.id.appDetailJobCompany);
-        skills = findViewById(R.id.appDetailJobSkills);
+        jobSkillsChipGroup = findViewById(R.id.appDetailJobSkillsChipGroup);
         description = findViewById(R.id.appDetailJobDescription);
         endDate = findViewById(R.id.appDetailJobEndDate);
         startDate = findViewById(R.id.appDetailJobStartDate);
@@ -53,7 +54,11 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
         description.setText(jobOffer.getDescription());
         endDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
         startDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
-        skills.setText(jobOffer.getSkills().toString());
+        for(Skill skill: jobOffer.getSkills()) {
+            Chip skillChip = new Chip(this);
+            skillChip.setText(skill.toString());
+            jobSkillsChipGroup.addView(skillChip);
+        }
 
 
         applyBtn.setOnClickListener(new View.OnClickListener() {

@@ -124,7 +124,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardSkills"
+            android:id="@+id/appCardSkills"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
@@ -141,11 +141,11 @@
                     android:text="Qualifications"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/appDetailJobSkills"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/appDetailJobSkillsChipGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp" />
+                    android:layout_gravity="center"/>
 
 
             </LinearLayout>
