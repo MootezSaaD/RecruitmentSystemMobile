@@ -22,6 +22,10 @@ public class Skill implements Serializable {
         this.skillType = skillType;
     }
 
+    public Skill(String skillName) {
+        this.skillName = skillName;
+    }
+
     public String getSkillName() {
         return skillName;
     }
