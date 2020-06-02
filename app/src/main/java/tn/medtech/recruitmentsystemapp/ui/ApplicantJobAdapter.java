@@ -25,21 +25,15 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
     public static class ApplicantJobViewHolder extends RecyclerView.ViewHolder {
         public TextView jobTitleTextView;
         public TextView jobCompanyTextView;
-        public TextView jobDescriptionTextView;
-        public TextView jobDomainTextView;
-        public TextView jobSkillsTextView;
         public TextView jobEndDateTextView;
+        public Button viewJobButton;
 
         public ApplicantJobViewHolder (@NonNull View itemView) {
             super(itemView);
             jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
             jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
-            jobDescriptionTextView = itemView.findViewById(R.id.appJobDescription);
-            jobDomainTextView = itemView.findViewById(R.id.appJobDomain);
-            jobSkillsTextView = itemView.findViewById(R.id.appJobSkills);
             jobEndDateTextView = itemView.findViewById(R.id.appJobEndDate);
-
-
+            viewJobButton = itemView.findViewById(R.id.jobDetailsBtn);
         }
 
     }
@@ -62,11 +56,16 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
         JobOffer currentItem = this.list.get(position);
         holder.jobTitleTextView.setText(currentItem.getTitle());
         holder.jobCompanyTextView.setText(currentItem.getCompany());
-        holder.jobDescriptionTextView.setText(currentItem.getDescription());
-        holder.jobDomainTextView.setText(currentItem.getDomain());
-        holder.jobSkillsTextView.setText(currentItem.getSkills().toString());
         holder.jobEndDateTextView.setText(currentItem.getEndDate());
 
+        holder.viewJobButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent jobOffer = new Intent(v.getContext(), ApplicantJobDetailActivity.class);
+                jobOffer.putExtra("jobDetailsObject", new Gson().toJson(currentItem));
+                v.getContext().startActivity(jobOffer);
+            }
+        });
     }
 
     @Override
