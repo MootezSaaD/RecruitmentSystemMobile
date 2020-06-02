@@ -1,7 +1,6 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
+import tn.medtech.recruitmentsystemapp.ui.Adapters.RecruiterJobItemAdapter;
+import tn.medtech.recruitmentsystemapp.ui.JobsRepository;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class ListRecruiterJobsFragment extends Fragment {
@@ -81,7 +82,11 @@ public class ListRecruiterJobsFragment extends Fragment {
                 jobOffers = new ArrayList<>(response.body());
                 adapter = new RecruiterJobItemAdapter(jobOffers);
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
+                if(jobOffers.size()>0) {
+                    Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "No Jobs Found !", Toast.LENGTH_SHORT).show();
+                }
 
 
             }

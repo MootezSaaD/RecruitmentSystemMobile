@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Authentication.Register;
 /*
  * This activity contains two buttons that allows the user to
  * register as a candidate or recruiter.
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import tn.medtech.recruitmentsystemapp.R;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 

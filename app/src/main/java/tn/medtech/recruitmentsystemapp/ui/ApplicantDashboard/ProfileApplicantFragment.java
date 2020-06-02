@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.os.Bundle;
 import android.util.Log;

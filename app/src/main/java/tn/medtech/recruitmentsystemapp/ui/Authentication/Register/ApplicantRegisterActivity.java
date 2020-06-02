@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Authentication.Register;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Login.LoginActivity;
 
 public class ApplicantRegisterActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
+import tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard.ApplicantJobDetailActivity;
 import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapter.ApplicantJobViewHolder> {

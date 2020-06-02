@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +23,8 @@ import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
+import tn.medtech.recruitmentsystemapp.ui.Adapters.ApplicantJobAdapter;
+import tn.medtech.recruitmentsystemapp.ui.JobsRepository;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class JobsApplicantFragment extends Fragment {

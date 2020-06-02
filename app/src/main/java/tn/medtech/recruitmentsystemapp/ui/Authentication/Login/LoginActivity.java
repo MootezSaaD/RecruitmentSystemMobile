@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Authentication.Login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +21,9 @@ import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
+import tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard.ApplicantDashboardActivity;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Register.RegisterActivity;
+import tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard.RecruiterDashboardActivity;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if the variable "redirectAfterRegisterMessage" exists
         if (sharedPreferences.contains("redirectAfterRegisterMessage")) {
             Toast.makeText(this, sharedPreferences.getString("redirectAfterRegisterMessage", ""), Toast.LENGTH_SHORT).show();
+            sharedPreferences.edit().remove("redirectAfterRegisterMessage").commit();
         }
         registerTextView = findViewById(R.id.textViewLogin);
         loginBtn = findViewById(R.id.loginBtn);

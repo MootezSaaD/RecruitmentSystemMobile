@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,8 +17,7 @@ import java.util.List;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
-
-import static androidx.core.content.ContextCompat.startActivity;
+import tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard.RecruiterJobOfferDetailsActivity;
 
 public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobItemAdapter.RecruiterJobViewHolder> {
     private ArrayList<JobOffer> list;

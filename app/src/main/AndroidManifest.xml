@@ -12,19 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.ApplicantJobDetailActivity"></activity>
-        <activity android:name=".ui.RecruiterJobOfferDetailsActivity"></activity>
-        <activity android:name=".ui.ApplicantDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.ApplicantDashboard.ApplicantJobDetailActivity"></activity>
+        <activity android:name=".ui.RecruiterDashboard.RecruiterJobOfferDetailsActivity"></activity>
+        <activity android:name=".ui.ApplicantDashboard.ApplicantDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
 <!--        Remove Action bar for the RecruiterDashBoardActivity-->
-        <activity android:name=".ui.RecruiterDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.CreateJobFragment" />
-        <activity android:name=".ui.ApplicantRegisterActivity" />
-        <activity android:name=".ui.RecruiterRegisterActivity" />
-        <activity android:name=".ui.DummyActivity" />
-        <activity android:name=".ui.GeneralRegisterActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.RecruiterDashboard.RecruiterDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.RecruiterDashboard.CreateJobFragment" />
+        <activity android:name=".ui.Authentication.Register.ApplicantRegisterActivity" />
+        <activity android:name=".ui.Authentication.Register.RecruiterRegisterActivity" />
+        <activity android:name=".ui.Authentication.Register.GeneralRegisterActivity" />
+        <activity android:name=".ui.Authentication.Register.RegisterActivity" />
+        <activity android:name=".ui.Authentication.Login.LoginActivity" />
+        <activity android:name=".ui.Authentication.Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

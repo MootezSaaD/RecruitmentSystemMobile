@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +22,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Application;
-import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
-import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
+import tn.medtech.recruitmentsystemapp.ui.Adapters.ApplicantApplicationAdapter;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class ApplicationsApplicantFragment extends Fragment {

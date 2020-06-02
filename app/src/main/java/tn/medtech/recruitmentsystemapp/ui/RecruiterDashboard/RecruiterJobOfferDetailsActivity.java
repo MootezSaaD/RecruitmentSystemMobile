@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 

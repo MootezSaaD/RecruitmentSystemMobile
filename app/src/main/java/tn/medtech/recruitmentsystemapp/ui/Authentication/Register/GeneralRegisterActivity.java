@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Authentication.Register;
 /*
  * This activity contains the common form that any user should pass by.
  *

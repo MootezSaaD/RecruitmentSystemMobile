@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Authentication.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 

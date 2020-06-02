@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,39 +21,40 @@ import com.google.gson.Gson;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 
-public class ApplicantDashboardActivity extends AppCompatActivity {
-
-    User applicant;
+public class RecruiterDashboardActivity extends AppCompatActivity {
+    Button createJobButton;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     View headerView;
     TextView navRecruiterName;
     TextView navRecruiterEmail;
+    User recruiter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        applicant = new Gson().fromJson(intent.getStringExtra("applicantObject"), User.class);
-        setContentView(R.layout.activity_applicant_dashboard);
-        Log.d("Recruiter From Dash", applicant.toString());
-        toolbar = findViewById(R.id.appToolbar);
+        recruiter = new Gson().fromJson(intent.getStringExtra("recruiterObject"), User.class);
+        setContentView(R.layout.activity_recruiter_dashboard);
+        Log.d("Recruiter From Dash", recruiter.toString());
+        toolbar = findViewById(R.id.recToolbar);
         setSupportActionBar(toolbar);
-        drawerLayout = findViewById(R.id.appDrawerLayout);
+        drawerLayout = findViewById(R.id.recDrawerLayout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        navigationView = findViewById(R.id.appNavView);
+        navigationView = findViewById(R.id.recNavView);
         headerView = navigationView.getHeaderView(0);
         navRecruiterName = headerView.findViewById(R.id.navRecName);
         navRecruiterEmail = headerView.findViewById(R.id.navRecEmail);
-        navRecruiterName.setText(applicant.getFirstName() + " " + applicant.getLastName());
-        navRecruiterEmail.setText(applicant.getEmail());
+        navRecruiterName.setText(recruiter.getFirstName() + " " + recruiter.getLastName());
+        navRecruiterEmail.setText(recruiter.getEmail());
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new JobsApplicantFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new ListRecruiterJobsFragment()).commit();
             navigationView.setCheckedItem(R.id.recNavList);
         }
 
@@ -61,14 +62,11 @@ public class ApplicantDashboardActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.appNavJobs:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new JobsApplicantFragment()).commit();
+                    case R.id.recNavList:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new ListRecruiterJobsFragment()).commit();
                         break;
-                    case R.id.appNavApplications:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new ApplicationsApplicantFragment()).commit();
-                        break;
-                    case R.id.appNavProfile:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new ProfileApplicantFragment()).commit();
+                    case R.id.recNavAdd:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new CreateJobFragment()).commit();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);

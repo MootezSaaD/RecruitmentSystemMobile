@@ -1,4 +1,4 @@
-package tn.medtech.recruitmentsystemapp.ui;
+package tn.medtech.recruitmentsystemapp.ui.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,6 @@ import com.google.android.material.chip.Chip;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Application;
-import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 
 public class ApplicantApplicationAdapter extends RecyclerView.Adapter<ApplicantApplicationAdapter.ApplicantApplicationViewHolder> {
     private ArrayList<Application> list;

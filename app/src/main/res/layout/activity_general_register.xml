@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.GeneralRegisterActivity">
+    tools:context=".ui.Authentication.Register.GeneralRegisterActivity">
 
 
     <RelativeLayout
@@ -26,9 +26,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="First Name"
                 android:paddingBottom="10dp"
-                app:startIconDrawable="@drawable/ic_person"
-                android:hint="First Name">
+                app:startIconDrawable="@drawable/ic_person">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -41,9 +41,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Last Name"
                 android:paddingBottom="10dp"
-                app:startIconDrawable="@drawable/ic_person"
-                android:hint="Last Name">
+                app:startIconDrawable="@drawable/ic_person">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -56,10 +56,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
                 android:hint="Email"
-                app:startIconDrawable="@drawable/ic_email"
-                android:inputType="textEmailAddress">
+                android:inputType="textEmailAddress"
+                android:paddingBottom="10dp"
+                app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -73,13 +73,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                app:startIconDrawable="@drawable/ic_lock"
                 android:hint="Password"
-                android:inputType="textPassword">
+                app:startIconDrawable="@drawable/ic_lock">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
