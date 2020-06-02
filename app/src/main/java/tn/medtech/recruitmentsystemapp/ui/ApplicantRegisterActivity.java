@@ -1,6 +1,8 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,12 +24,13 @@ public class ApplicantRegisterActivity extends AppCompatActivity {
 
     TextInputLayout phoneNumber;
     Button finalRegisterBtn;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_register);
-
+        sharedPreferences = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), Activity.MODE_PRIVATE);
         finalRegisterBtn = findViewById(R.id.applicantRegisterBtnBtn);
         phoneNumber = findViewById(R.id.phoneNbrFldBtn);
 
@@ -46,7 +49,10 @@ public class ApplicantRegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
             @Override
             public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {
-                Toast.makeText(ApplicantRegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("redirectAfterRegisterMessage", response.body().getMessage());
+                editor.apply();
+                startActivity(new Intent(ApplicantRegisterActivity.this, LoginActivity.class));
             }
 
             @Override

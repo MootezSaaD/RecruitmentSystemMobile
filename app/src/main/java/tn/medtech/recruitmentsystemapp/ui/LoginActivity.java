@@ -1,6 +1,8 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +29,18 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout emailFld;
     TextInputLayout passwordFld;
     Button loginBtn;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPreferences = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), Activity.MODE_PRIVATE);
+        // Check if the variable "redirectAfterRegisterMessage" exists
+        if (sharedPreferences.contains("redirectAfterRegisterMessage")) {
+            Toast.makeText(this, sharedPreferences.getString("redirectAfterRegisterMessage", ""), Toast.LENGTH_SHORT).show();
+        }
         registerTextView = findViewById(R.id.textViewLogin);
         loginBtn = findViewById(R.id.loginBtn);
         emailFld = findViewById(R.id.loginEmailFld);
