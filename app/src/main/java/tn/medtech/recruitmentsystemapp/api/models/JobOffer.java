@@ -25,7 +25,8 @@ public class JobOffer {
     @SerializedName("skills")
     @Expose
     private ArrayList<Skill> skills = new ArrayList<>();
-    @SerializedName("Company")
+    @SerializedName("company")
+    @Expose
     private String company;
 
     public JobOffer(String title, String domain, String description, String startDate, String endDate, ArrayList<Skill> skills) {

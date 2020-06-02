@@ -31,6 +31,7 @@ public class JobsApplicantFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<JobOffer> jobList;
+    private JobsRepository jobsRepository = JobsRepository.getInstance();
 
     @Nullable
     @Override
@@ -43,17 +44,16 @@ public class JobsApplicantFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<JobOffer> exampleList = new ArrayList<>();
-        ArrayList<Skill> skills = new ArrayList<Skill>();
-        skills.add(new Skill(0,"Pyhton2","required"));
-        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "nill", skills));
-        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "27-1-2020", skills));
+        jobList = new ArrayList<>(jobsRepository.findAll());
         recyclerView = getView().findViewById(R.id.jobsApplicantRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new ApplicantJobAdapter(exampleList);
+        adapter = new ApplicantJobAdapter(jobList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        if(!jobsRepository.isLoaded()) {
+            getJobs();
+        }
     }
 
     private void getJobs() {
@@ -62,10 +62,11 @@ public class JobsApplicantFragment extends Fragment {
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
             public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {
-                jobList = (ArrayList<JobOffer>) response.body();
-                jobList.forEach(domain -> {
-                    System.out.println(domain.getTitle());
-                });
+                jobsRepository.addAll(response.body());
+                jobList = new ArrayList<>(response.body());
+                adapter = new ApplicantJobAdapter(jobList);
+                recyclerView.setAdapter(adapter);
+                Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<List<JobOffer>> call, Throwable t) {

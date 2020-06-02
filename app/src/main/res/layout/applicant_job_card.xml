@@ -45,45 +45,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description:"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/appJobDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description:"
-                android:textAppearance="?attr/textAppearanceBody2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Domain:"
-                android:layout_marginTop="4dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/appJobDomain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Domain:"
-                android:textAppearance="?attr/textAppearanceBody2" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Skills:"
-                android:layout_marginTop="4dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/appJobSkills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Skills:"
-                android:textAppearance="?attr/textAppearanceBody2" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Deadline:"
                 android:layout_marginTop="4dp"
                 android:textStyle="bold"
@@ -106,7 +67,8 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apply" />
+                android:text="Details"
+                android:id="@+id/jobDetailsBtn"/>
         </LinearLayout>
 
     </LinearLayout>

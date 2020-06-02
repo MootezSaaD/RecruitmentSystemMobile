@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.ApplicantJobDetailActivity"></activity>
         <activity android:name=".ui.RecruiterJobOfferDetailsActivity"></activity>
         <activity android:name=".ui.ApplicantDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
 <!--        Remove Action bar for the RecruiterDashBoardActivity-->
