@@ -1,8 +1,5 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,28 +12,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
-import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
@@ -66,7 +58,7 @@ public class ProfileApplicantFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-            getApplicantSkills();
+        getApplicantSkills();
 
 
         getSkills();
@@ -112,7 +104,6 @@ public class ProfileApplicantFragment extends Fragment {
                                 applicantSkillsChipGroup.removeView(view);
                             }
                         });
-                        Log.d("Skill Selected", skill.toString());
                         applicantSkillsChipGroup.addView(skillChip);
                         // Adding skills to the job offer's skill arrayList
                         Skill skill2 = new Skill(skill.toString());
@@ -123,10 +114,11 @@ public class ProfileApplicantFragment extends Fragment {
                 });
 
             }
+
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Throwable","Exception",t);
+                Log.d("Throwable", "Exception", t);
             }
         });
     }
@@ -137,23 +129,37 @@ public class ProfileApplicantFragment extends Fragment {
         call.enqueue(new Callback<List<Skill>>() {
             @Override
             public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
-                applicantSkills = new ArrayList<>(response.body());
                 addedSkills = new ArrayList<>(response.body());
-                applicantSkills.forEach(skill -> {
+                addedSkills.forEach(skill -> {
                     Chip skillChip = new Chip(getActivity());
                     skillChip.setText(skill.toString());
+                    skillChip.setCloseIconVisible(true);
+                    skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            applicantSkillsChipGroup.removeView(view);
+                            Iterator<Skill> iterator = addedSkills.iterator();
+                            while (iterator.hasNext()) {
+                                if (iterator.next().toString().toLowerCase().equals(skillChip.getText().toString().toLowerCase())) {
+                                    iterator.remove();
+                                    break;
+                                }
+                            }
+                        }
+                    });
                     applicantSkillsChipGroup.addView(skillChip);
                 });
             }
+
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Throwable","Exception",t);
+                Log.d("Throwable", "Exception", t);
             }
         });
     }
 
-    public void addSkills(List<Skill> skills){
+    public void addSkills(List<Skill> skills) {
         SkillService skillService = ServiceGenerator.createService(SkillService.class);
         System.out.println(addedSkills.toString());
         Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = skillService.addSkills("Bearer " + TokenService.getToken(), addedSkills);
