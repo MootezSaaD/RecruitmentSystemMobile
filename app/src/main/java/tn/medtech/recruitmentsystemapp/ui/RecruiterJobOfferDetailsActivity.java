@@ -13,10 +13,14 @@ import com.google.gson.Gson;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
+import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
     TextView title;
     TextView company;
+    TextView startDate;
+    TextView endDate;
+    TextView description;
     ChipGroup jobSkillsChipGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +32,18 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
         setTitle(jobOffer.getTitle());
         title = findViewById(R.id.recJobTitle);
         company = findViewById(R.id.recJobCompany);
+        startDate = findViewById(R.id.recJobstartDate);
+        endDate = findViewById(R.id.recJobEndDate);
+        description = findViewById(R.id.recDetailJobDescription);
 
         title.setText(jobOffer.getTitle());
         company.setText(jobOffer.getCompany());
+        description.setText(jobOffer.getDescription());
+        startDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
+        endDate.setText(DateParser.parseDate(jobOffer.getEndDate()));
         jobSkillsChipGroup = findViewById(R.id.recJobSkills);
+
+
         for(Skill skill : jobOffer.getSkills()) {
             Chip skillChip = new Chip(this);
             skillChip.setText(skill.toString());
