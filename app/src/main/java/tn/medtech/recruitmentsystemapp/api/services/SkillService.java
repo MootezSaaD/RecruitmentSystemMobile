@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import tn.medtech.recruitmentsystemapp.api.models.Response;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
 
 public interface SkillService {
@@ -20,6 +21,6 @@ public interface SkillService {
     Call<List<Skill>> getApplicantSkills(@Header("Authorization") String token);
 
     @POST("applicants/skills")
-    Call<List<Skill>> addSkills(@Header("Authorization") String token, @Body List<Skill> array);
+    Call<Response> addSkills(@Header("Authorization") String token, @Body List<Skill> array);
 
 }

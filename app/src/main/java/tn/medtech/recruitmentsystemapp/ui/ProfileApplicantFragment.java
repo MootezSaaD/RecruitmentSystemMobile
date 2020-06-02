@@ -49,7 +49,6 @@ public class ProfileApplicantFragment extends Fragment {
     List<Skill> skillsList;
     ArrayList<Skill> applicantSkills;
     List<Skill> addedSkills;
-    ApplicantSkillsRepository applicantSkillsRepository = ApplicantSkillsRepository.getInstance();
 
     TextView name;
     TextView phoneNumber;
@@ -67,10 +66,8 @@ public class ProfileApplicantFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        applicantSkills = new ArrayList<>(applicantSkillsRepository.findAll());
-        if(!applicantSkillsRepository.isLoaded()){
             getApplicantSkills();
-        }
+
 
         getSkills();
         addedSkills = new ArrayList<>();
@@ -118,7 +115,8 @@ public class ProfileApplicantFragment extends Fragment {
                         Log.d("Skill Selected", skill.toString());
                         applicantSkillsChipGroup.addView(skillChip);
                         // Adding skills to the job offer's skill arrayList
-                        addedSkills.add(new Skill(skill.toString()));
+                        Skill skill2 = new Skill(skill.toString());
+                        addedSkills.add(skill2);
                         // Clear the actv
                         skill1.setText("");
                     }
@@ -128,6 +126,7 @@ public class ProfileApplicantFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.d("Throwable","Exception",t);
             }
         });
     }
@@ -138,8 +137,8 @@ public class ProfileApplicantFragment extends Fragment {
         call.enqueue(new Callback<List<Skill>>() {
             @Override
             public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
-                applicantSkillsRepository.addAll(response.body());
                 applicantSkills = new ArrayList<>(response.body());
+                addedSkills = new ArrayList<>(response.body());
                 applicantSkills.forEach(skill -> {
                     Chip skillChip = new Chip(getActivity());
                     skillChip.setText(skill.toString());
@@ -149,6 +148,7 @@ public class ProfileApplicantFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.d("Throwable","Exception",t);
             }
         });
     }
@@ -156,17 +156,19 @@ public class ProfileApplicantFragment extends Fragment {
     public void addSkills(List<Skill> skills){
         SkillService skillService = ServiceGenerator.createService(SkillService.class);
         System.out.println(addedSkills.toString());
-        Call<List<Skill>> call = skillService.addSkills("Bearer " + TokenService.getToken(), addedSkills);
-        call.enqueue(new Callback<List<Skill>>() {
+        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = skillService.addSkills("Bearer " + TokenService.getToken(), addedSkills);
+        call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
             @Override
-            public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
-                System.out.println("Success");
+            public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {
+                Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
+
             @Override
-            public void onFailure(Call<List<Skill>> call, Throwable t) {
+            public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 }
