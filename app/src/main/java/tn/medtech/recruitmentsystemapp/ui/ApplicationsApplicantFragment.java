@@ -1,6 +1,7 @@
 package tn.medtech.recruitmentsystemapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tn.medtech.recruitmentsystemapp.R;
+import tn.medtech.recruitmentsystemapp.api.models.Application;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
@@ -25,10 +29,11 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class ApplicationsApplicantFragment extends Fragment {
+    private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    ArrayList<JobOffer> applicationList;
+    ArrayList<Application> applicationList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -40,35 +45,45 @@ public class ApplicationsApplicantFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<JobOffer> exampleList = new ArrayList<>();
-        ArrayList<Skill> skills = new ArrayList<Skill>();
-        skills.add(new Skill(0,"Pyhton2","required"));
-        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "nill", skills));
-        exampleList.add(new JobOffer("Senior Web Dev.", "Web Development", "Description", "Facebook", "nill", "27-1-2020", skills));
         recyclerView = getView().findViewById(R.id.applicationsApplicantRecyclerView);
+        swipeContainer = getView().findViewById(R.id.swipeApplicantApplicationsContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMyApplications();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new ApplicantApplicationAdapter(exampleList);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        getMyApplications();
     }
 
     private void getMyApplications() {
+        swipeContainer.setRefreshing(true);
         JobService jobService = ServiceGenerator.createService(JobService.class);
-        Call<List<JobOffer>> call = jobService.getMyJobs("Bearer " + TokenService.getToken());
-        call.enqueue(new Callback<List<JobOffer>>() {
+        Call<List<Application>> call = jobService.getApplications("Bearer " + TokenService.getToken());
+        call.enqueue(new Callback<List<Application>>() {
             @Override
-            public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {
-                applicationList = (ArrayList<JobOffer>) response.body();
-                applicationList.forEach(domain -> {
-                    System.out.println(domain.getTitle());
-                });
+            public void onResponse(Call<List<Application>> call, Response<List<Application>> response) {
+                swipeContainer.setRefreshing(false);
+                applicationList = new ArrayList<>(response.body());
+                Log.d("AppList", applicationList.toString());
+                adapter = new ApplicantApplicationAdapter(applicationList);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
+                Toast.makeText(getActivity(), "Applications Loaded !", Toast.LENGTH_SHORT).show();
             }
+
             @Override
-            public void onFailure(Call<List<JobOffer>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<Application>> call, Throwable t) {
+                swipeContainer.setRefreshing(false);
+                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
