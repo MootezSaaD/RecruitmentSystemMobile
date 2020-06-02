@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,5 +72,16 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
     @Override
     public int getItemCount() {
         return this.list.size();
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        list.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<JobOffer> list) {
+        list.addAll(list);
+        notifyDataSetChanged();
     }
 }

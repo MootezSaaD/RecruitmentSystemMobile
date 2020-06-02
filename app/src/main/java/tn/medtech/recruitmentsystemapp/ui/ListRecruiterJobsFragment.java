@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class ListRecruiterJobsFragment extends Fragment {
+    private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -44,6 +46,17 @@ public class ListRecruiterJobsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         jobOffers = new ArrayList<>(jobsRepository.findAll());
         recyclerView = getView().findViewById(R.id.recListJobsRecyclerView);
+        swipeContainer = getView().findViewById(R.id.swipeRecruiterJobsContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getAllJobs();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         adapter = new RecruiterJobItemAdapter(jobOffers);
@@ -56,12 +69,14 @@ public class ListRecruiterJobsFragment extends Fragment {
     }
 
     public void getAllJobs() {
+        swipeContainer.setRefreshing(true);
         JobService jobService = ServiceGenerator.createService(JobService.class);
         Call<List<JobOffer>> call = jobService.getJobs("Bearer " + TokenService.getToken());
 
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
             public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {
+                swipeContainer.setRefreshing(false);
                 jobsRepository.addAll(response.body());
                 jobOffers = new ArrayList<>(response.body());
                 adapter = new RecruiterJobItemAdapter(jobOffers);
@@ -73,6 +88,7 @@ public class ListRecruiterJobsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<JobOffer>> call, Throwable t) {
+                swipeContainer.setRefreshing(false);
                 Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
             }
         });

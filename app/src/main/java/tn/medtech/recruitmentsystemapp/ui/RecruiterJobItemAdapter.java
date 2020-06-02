@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
@@ -66,5 +67,16 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
     @Override
     public int getItemCount() {
         return this.list.size();
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        list.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<JobOffer> list) {
+        list.addAll(list);
+        notifyDataSetChanged();
     }
 }

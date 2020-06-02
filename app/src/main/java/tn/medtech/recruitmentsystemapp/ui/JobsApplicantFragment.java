@@ -6,27 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
-import tn.medtech.recruitmentsystemapp.api.models.Skill;
 import tn.medtech.recruitmentsystemapp.api.services.JobService;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class JobsApplicantFragment extends Fragment {
+    private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,30 +46,45 @@ public class JobsApplicantFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         jobList = new ArrayList<>(jobsRepository.findAll());
         recyclerView = getView().findViewById(R.id.jobsApplicantRecyclerView);
+        swipeContainer = getView().findViewById(R.id.swipeRecruiterJobsContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getJobs();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         adapter = new ApplicantJobAdapter(jobList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        if(!jobsRepository.isLoaded()) {
+        if (!jobsRepository.isLoaded()) {
             getJobs();
         }
     }
 
     private void getJobs() {
+        swipeContainer.setRefreshing(true);
         JobService jobService = ServiceGenerator.createService(JobService.class);
         Call<List<JobOffer>> call = jobService.getJobs("Bearer " + TokenService.getToken());
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
             public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {
+                swipeContainer.setRefreshing(false);
                 jobsRepository.addAll(response.body());
                 jobList = new ArrayList<>(response.body());
                 adapter = new ApplicantJobAdapter(jobList);
                 recyclerView.setAdapter(adapter);
                 Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<List<JobOffer>> call, Throwable t) {
+                swipeContainer.setRefreshing(false);
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
