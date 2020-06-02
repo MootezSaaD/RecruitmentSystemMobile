@@ -48,7 +48,7 @@ public class User implements Serializable {
 
     // Constructor for recruiter
     public User(String firstName, String lastName, String email, String password,Company company) {
-        this.userType = "Recuriter";
+        this.userType = "Recruiter";
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

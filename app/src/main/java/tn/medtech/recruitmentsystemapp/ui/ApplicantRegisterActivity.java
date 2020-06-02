@@ -42,15 +42,15 @@ public class ApplicantRegisterActivity extends AppCompatActivity {
     public void sendRegisterRequest(User applicant) {
         // Call the UserClient and get the user object for the request
         UserClient userClient = ServiceGenerator.createService(UserClient.class);
-        Call<User> call = userClient.registerApplicant(applicant);
-        call.enqueue(new Callback<User>() {
+        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = userClient.register(applicant);
+        call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(ApplicantRegisterActivity.this, "Applicant Added !", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {
+                Toast.makeText(ApplicantRegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
                 Toast.makeText(ApplicantRegisterActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
