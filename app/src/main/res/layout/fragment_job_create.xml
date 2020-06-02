@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -24,8 +23,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title"
                 android:layout_marginBottom="10dp"
+                android:hint="Title"
                 app:startIconDrawable="@drawable/ic_rate_review">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -39,8 +38,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Description"
                 android:layout_marginBottom="10dp"
+                android:hint="Description"
                 app:startIconDrawable="@drawable/ic_description">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -97,20 +96,20 @@
                 android:layout_marginBottom="10dp"
                 android:height="64dp"
                 android:clickable="true"
-                app:strokeColor="@color/colorPrimary"
                 android:ems="10"
                 android:hint="Domain"
                 android:text="Domain"
+                app:strokeColor="@color/colorPrimary"
                 app:strokeWidth="2dp" />
 
             <TextView
-                android:id="@+id/skillTxtView"
+                android:id="@+id/requiredSkillTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Skills List:" />
+                android:text="Required Skills:" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/skillsChipGroup"
+                android:id="@+id/requiredSkillsChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -118,14 +117,39 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Skills">
+                android:hint="Required Skills">
 
-            <AutoCompleteTextView
-                android:id="@+id/actvSkills"
+                <AutoCompleteTextView
+                    android:id="@+id/actvRequiredSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:completionThreshold="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/optionalSkillTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:completionThreshold="1"
-                android:layout_marginBottom="10dp" />
+                android:text="Optional Skills:" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/optionalSkillsChipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Optional Skills">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvOptionalSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:completionThreshold="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

@@ -50,10 +50,12 @@ public class CreateJobFragment extends Fragment {
     TextInputEditText jobTitle;
     TextInputEditText jobDescription;
     Button domain;
-    ChipGroup skillsChipGroup;
+    ChipGroup requiredSkillsChipGroup;
+    ChipGroup optionalSkillsChipGroup;
     List<Skill> skillsList;
     List<Domain> domainList;
-    AutoCompleteTextView skills;
+    AutoCompleteTextView requiredSkills;
+    AutoCompleteTextView optionalSkills;
     // We will the store the skills to submit here
     ArrayList<Skill> applicationSkills = new ArrayList<>();
     ArrayList<Domain> domains = new ArrayList<>();
@@ -79,8 +81,10 @@ public class CreateJobFragment extends Fragment {
         startDate = v.findViewById(R.id.startDateFld);
         endDate = v.findViewById(R.id.endDateFld);
         domain = v.findViewById(R.id.btnDomain);
-        skills = v.findViewById(R.id.actvSkills);
-        skillsChipGroup = v.findViewById(R.id.skillsChipGroup);
+        requiredSkills = v.findViewById(R.id.actvRequiredSkills);
+        optionalSkills = v.findViewById(R.id.actvOptionalSkills);
+        requiredSkillsChipGroup = v.findViewById(R.id.requiredSkillsChipGroup);
+        optionalSkillsChipGroup = v.findViewById(R.id.optionalSkillsChipGroup);
         postJob = v.findViewById(R.id.postJobBtn);
         jobTitle = v.findViewById(R.id.titleFld);
         jobDescription = v.findViewById(R.id.descFld);
@@ -134,20 +138,22 @@ public class CreateJobFragment extends Fragment {
                 skillsList.forEach(skill -> System.out.println(skill.getSkillName() + " Type: " + skill.getSkillType()));
                 // Create the array adapter
                 ArrayAdapter<Skill> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, skillsList);
-                // Add the adapter to actv
-                skills.setAdapter(arrayAdapter);
+                // Add the adapter to both actv
+                requiredSkills.setAdapter(arrayAdapter);
+                optionalSkills.setAdapter(arrayAdapter);
                 // Add to the ChipGroup
-                skills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                requiredSkills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Chip skillChip = new Chip(getActivity());
                         Skill skill = (Skill) parent.getItemAtPosition(position);
+                        skill.setSkillType("Required");
                         skillChip.setText(skill.toString());
                         skillChip.setCloseIconVisible(true);
                         skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                skillsChipGroup.removeView(view);
+                                requiredSkillsChipGroup.removeView(view);
                                 // Need to handle removal from applicationSkills arrayList
                                 Iterator<Skill> iterator = applicationSkills.iterator();
                                 while (iterator.hasNext()) {
@@ -158,14 +164,44 @@ public class CreateJobFragment extends Fragment {
                                 }
                             }
                         });
-                        skillsChipGroup.addView(skillChip);
+                        Log.d("Skill Selected", skill.toString());
+                        requiredSkillsChipGroup.addView(skillChip);
                         // Adding skills to the job offer's skill arrayList
                         applicationSkills.add(skill);
                         // Clear the actv
-                        skills.setText("");
+                        requiredSkills.setText("");
                     }
                 });
 
+                optionalSkills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Chip skillChip = new Chip(getActivity());
+                        Skill skill = (Skill) parent.getItemAtPosition(position);
+                        skill.setSkillType("Optional");
+                        skillChip.setText(skill.toString());
+                        skillChip.setCloseIconVisible(true);
+                        skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                optionalSkillsChipGroup.removeView(view);
+                                // Need to handle removal from applicationSkills arrayList
+                                Iterator<Skill> iterator = applicationSkills.iterator();
+                                while (iterator.hasNext()) {
+                                    if (iterator.next().toString().toLowerCase().equals(skillChip.getText().toString().toLowerCase())) {
+                                        iterator.remove();
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                        optionalSkillsChipGroup.addView(skillChip);
+                        // Adding skills to the job offer's skill arrayList
+                        applicationSkills.add(skill);
+                        // Clear the actv
+                        optionalSkills.setText("");
+                    }
+                });
             }
 
 
