@@ -4,9 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class JobOffer {
+    @SerializedName("id")
+    @Expose
+    private int id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -38,7 +40,7 @@ public class JobOffer {
         this.skills = skills;
     }
 
-    public JobOffer(String title, String domain, String description, String company,String startDate, String endDate, ArrayList<Skill> skills) {
+    public JobOffer(String title, String domain, String description, String company, String startDate, String endDate, ArrayList<Skill> skills) {
         this.title = title;
         this.domain = domain;
         this.description = description;
@@ -102,5 +104,13 @@ public class JobOffer {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

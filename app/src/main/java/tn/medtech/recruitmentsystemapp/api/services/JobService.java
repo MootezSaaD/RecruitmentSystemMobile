@@ -7,7 +7,10 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
+import tn.medtech.recruitmentsystemapp.api.models.Response;
 
 public interface JobService {
     @POST("jobs/create")
@@ -18,6 +21,9 @@ public interface JobService {
 
     @GET("applicants/jobs")
     Call<List<JobOffer>> getMyJobs(@Header("Authorization") String token);
+
+    @PUT("applicants/jobs/{jobID}")
+    Call<Response> applyForJob(@Header("Authorization") String token, @Path("jobID") int jobID);
 
     @POST("test")
     Call<JobOffer> testCreateJob(@Header("Authorization") String token, @Body JobOffer jobOffer);
