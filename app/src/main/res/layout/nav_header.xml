@@ -14,7 +14,7 @@
         android:paddingTop="60dp"
         android:text="John Doe"
         android:textColor="#fff"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:textStyle="bold" />
 
     <TextView
