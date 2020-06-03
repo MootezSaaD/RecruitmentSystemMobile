@@ -89,7 +89,7 @@ public class CreateJobFragment extends Fragment {
         jobTitle = v.findViewById(R.id.titleFld);
         jobDescription = v.findViewById(R.id.descFld);
 
-        DatePickerUniversal startDateDPU = new DatePickerUniversal(startDate, "yyyy-MM-dd", 0);
+        DatePickerUniversal startDateDPU = new DatePickerUniversal(startDate, "yyyy-MM-dd", 1);
         DatePickerUniversal endDateDPU = new DatePickerUniversal(endDate, "yyyy-MM-dd", 1);
 
         domain.setOnClickListener(new View.OnClickListener() {

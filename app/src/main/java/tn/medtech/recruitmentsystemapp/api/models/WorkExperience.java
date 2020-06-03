@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class WorkExperience {
 
-    @SerializedName("title")
+    @SerializedName("jobTitle")
     @Expose
     private String title;
 

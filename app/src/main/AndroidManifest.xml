@@ -12,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.ApplicantDashboard.ApplicantJobDetailActivity"></activity>
-        <activity android:name=".ui.RecruiterDashboard.RecruiterJobOfferDetailsActivity"></activity>
-        <activity android:name=".ui.ApplicantDashboard.ApplicantDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
-<!--        Remove Action bar for the RecruiterDashBoardActivity-->
-        <activity android:name=".ui.RecruiterDashboard.RecruiterDashboardActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.ApplicantDashboard.ApplicantAddWorkExperience"></activity>
+        <activity android:name=".ui.ApplicantDashboard.ApplicantJobDetailActivity" />
+        <activity android:name=".ui.RecruiterDashboard.RecruiterJobOfferDetailsActivity" />
+        <activity
+            android:name=".ui.ApplicantDashboard.ApplicantDashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Remove Action bar for the RecruiterDashBoardActivity -->
+        <activity
+            android:name=".ui.RecruiterDashboard.RecruiterDashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.RecruiterDashboard.CreateJobFragment" />
         <activity android:name=".ui.Authentication.Register.ApplicantRegisterActivity" />
         <activity android:name=".ui.Authentication.Register.RecruiterRegisterActivity" />

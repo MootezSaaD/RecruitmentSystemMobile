@@ -51,7 +51,7 @@ public class ProfileApplicantFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Profile");
+        getActivity().setTitle("General");
         return inflater.inflate(R.layout.fragment_profile_applicant, container, false);
     }
 

@@ -69,6 +69,9 @@ public class ApplicantDashboardActivity extends AppCompatActivity {
                     case R.id.appNavProfile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new ProfileApplicantFragment()).commit();
                         break;
+                    case R.id.appWexp:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new WorkExperienceFragment()).commit();
+                        break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
