@@ -11,5 +11,9 @@
             android:id="@+id/recNavAdd"
             android:icon="@drawable/ic_add"
             android:title="Add" />
+        <item
+            android:id="@+id/recMatchJob"
+            android:icon="@drawable/ic_group_work"
+            android:title="Match Jobs" />
     </group>
 </menu>

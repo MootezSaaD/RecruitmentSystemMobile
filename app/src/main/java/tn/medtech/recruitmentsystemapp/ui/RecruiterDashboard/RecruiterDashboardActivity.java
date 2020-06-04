@@ -68,6 +68,9 @@ public class RecruiterDashboardActivity extends AppCompatActivity {
                     case R.id.recNavAdd:
                         getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new CreateJobFragment()).commit();
                         break;
+                    case R.id.recMatchJob:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new RecruiterMatchJobsFragment()).commit();
+                        break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
