@@ -39,4 +39,9 @@ public class TokenService {
         return token;
     }
 
+    // Needed for the MainActivity
+    public String getAccessToken() {
+        return prefs.getString("ACCESS_TOKEN", null);
+    }
+
 }

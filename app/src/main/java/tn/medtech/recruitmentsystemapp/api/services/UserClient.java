@@ -5,7 +5,6 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import tn.medtech.recruitmentsystemapp.api.models.AccessToken;
 import tn.medtech.recruitmentsystemapp.api.models.Response;
@@ -19,7 +18,7 @@ public interface UserClient {
     Call<Response> register(@Body User user);
 
     @GET("users/@me")
-    Call<User> getProfile(@Header("Authorization") String token);
+    Call<User> getProfile();
 
     @POST("users/refresh-token")
     @FormUrlEncoded
