@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         if (tokenService.getAccessToken() == null) {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
+            finish();
         } else {
             this.getProfile(tokenService);
         }
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.body().getUserType().equalsIgnoreCase("applicant"))
+                if (response.body().getUserType().equalsIgnoreCase("applicant")) {
                     startActivity(new Intent(MainActivity.this, ApplicantDashboardActivity.class)
                             .putExtra("applicantObject", new Gson().toJson(
                                     new User(response.body().getFirstName(),
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                                             "",
                                             response.body().getPhoneNumber())
                             )));
-                else if (response.body().getUserType().equalsIgnoreCase("recruiter")) {
+                    finish();
+                } else if (response.body().getUserType().equalsIgnoreCase("recruiter")) {
                     startActivity(new Intent(MainActivity.this, RecruiterDashboardActivity.class)
                             .putExtra("recruiterObject", new Gson().toJson(
                                     new User(response.body().getFirstName(),
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                             "",
                                             response.body().getCompany())
                             )));
+                    finish();
                 }
             }
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

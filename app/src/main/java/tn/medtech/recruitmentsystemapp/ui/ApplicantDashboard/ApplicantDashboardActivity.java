@@ -18,6 +18,9 @@ import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Login.LoginActivity;
+import tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard.RecruiterDashboardActivity;
+import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class ApplicantDashboardActivity extends AppCompatActivity {
 
@@ -72,6 +75,13 @@ public class ApplicantDashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.appDegrees:
                         getSupportFragmentManager().beginTransaction().replace(R.id.appFragmentContainer, new DegreeListFragment()).commit();
+                        break;
+                    case R.id.appLogout:
+                        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+                        tokenService.deleteToken();
+                        Intent i = new Intent(ApplicantDashboardActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);

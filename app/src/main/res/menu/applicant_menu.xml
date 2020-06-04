@@ -33,5 +33,9 @@
                     android:title="Degrees" />
             </menu>
         </item>
+        <item
+            android:id="@+id/appLogout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
     </group>
 </menu>

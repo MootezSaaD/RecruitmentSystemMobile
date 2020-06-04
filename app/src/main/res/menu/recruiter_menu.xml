@@ -15,5 +15,9 @@
             android:id="@+id/recMatchJob"
             android:icon="@drawable/ic_group_work"
             android:title="Match Jobs" />
+        <item
+            android:id="@+id/recLogout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
     </group>
 </menu>

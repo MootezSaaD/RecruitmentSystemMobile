@@ -19,6 +19,9 @@ import com.google.gson.Gson;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.User;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Login.LoginActivity;
+import tn.medtech.recruitmentsystemapp.ui.Authentication.Login.MainActivity;
+import tn.medtech.recruitmentsystemapp.util.TokenService;
 
 public class RecruiterDashboardActivity extends AppCompatActivity {
     Button createJobButton;
@@ -68,6 +71,13 @@ public class RecruiterDashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.recMatchJob:
                         getSupportFragmentManager().beginTransaction().replace(R.id.recFragmentContainer, new RecruiterMatchJobsFragment()).commit();
+                        break;
+                    case R.id.recLogout:
+                        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+                        tokenService.deleteToken();
+                        Intent i = new Intent(RecruiterDashboardActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
