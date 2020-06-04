@@ -36,7 +36,7 @@ public class RecruiterJobMatchAdapter extends RecyclerView.Adapter<RecruiterJobM
         holder.jobMatchDescription.setText(selectedApplicant.getJobDescription());
         holder.jobMatchStartDate.setText(DateParser.parseDate(selectedApplicant.getJobStartDate()));
         holder.jobMatchEndDate.setText(DateParser.parseDate(selectedApplicant.getJobEndDate()));
-        holder.jobMatchFirstName.setText(DateParser.parseDate(selectedApplicant.getFirstName()));
+        holder.jobMatchFirstName.setText(selectedApplicant.getFirstName());
         holder.jobMatchLastName.setText(selectedApplicant.getLastName());
         holder.jobMatchEmail.setText(selectedApplicant.getEmail());
         holder.jobMatchPhoneNumber.setText(selectedApplicant.getPhoneNumber());
