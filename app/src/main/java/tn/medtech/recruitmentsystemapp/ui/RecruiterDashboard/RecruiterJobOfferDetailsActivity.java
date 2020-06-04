@@ -1,10 +1,10 @@
 package tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -22,6 +22,7 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
     TextView endDate;
     TextView description;
     ChipGroup jobSkillsChipGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +45,11 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
         jobSkillsChipGroup = findViewById(R.id.recJobSkills);
 
 
-        for(Skill skill : jobOffer.getSkills()) {
+        for (Skill skill : jobOffer.getSkills()) {
             Chip skillChip = new Chip(this);
             skillChip.setText(skill.toString());
             jobSkillsChipGroup.addView(skillChip);
         }
-
 
 
     }

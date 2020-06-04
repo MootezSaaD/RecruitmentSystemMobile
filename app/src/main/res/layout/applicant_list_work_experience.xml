@@ -10,10 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:contentDescription="Add WorkExperience"
         android:layout_marginTop="20dp"
+        android:contentDescription="Add WorkExperience"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_plus" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeApplicantWorExpList"
         android:layout_width="match_parent"

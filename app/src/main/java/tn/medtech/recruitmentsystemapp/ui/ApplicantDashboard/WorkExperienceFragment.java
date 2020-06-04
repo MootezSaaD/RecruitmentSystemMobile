@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,8 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.WorkExperienceService;
 import tn.medtech.recruitmentsystemapp.ui.Adapters.WorkExperienceAdapter;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class WorkExperienceFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
@@ -75,8 +76,9 @@ public class WorkExperienceFragment extends Fragment {
 
     public void getWorkExperiences() {
         swipeContainer.setRefreshing(true);
-        WorkExperienceService workExperienceService = ServiceGenerator.createService(WorkExperienceService.class);
-        Call<List<WorkExperience>> call = workExperienceService.getWorkExperiences("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        WorkExperienceService workExperienceService = ServiceGenerator.createServiceWithAuth(WorkExperienceService.class, tokenService);
+        Call<List<WorkExperience>> call = workExperienceService.getWorkExperiences();
         call.enqueue(new Callback<List<WorkExperience>>() {
             @Override
             public void onResponse(Call<List<WorkExperience>> call, Response<List<WorkExperience>> response) {

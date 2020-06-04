@@ -27,6 +27,8 @@ import tn.medtech.recruitmentsystemapp.ui.Adapters.RecruiterJobItemAdapter;
 import tn.medtech.recruitmentsystemapp.ui.JobsRepository;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class ListRecruiterJobsFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
@@ -71,8 +73,9 @@ public class ListRecruiterJobsFragment extends Fragment {
 
     public void getAllJobs() {
         swipeContainer.setRefreshing(true);
-        JobService jobService = ServiceGenerator.createService(JobService.class);
-        Call<List<JobOffer>> call = jobService.getJobs("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+        Call<List<JobOffer>> call = jobService.getJobs();
 
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
@@ -82,7 +85,7 @@ public class ListRecruiterJobsFragment extends Fragment {
                 jobOffers = new ArrayList<>(response.body());
                 adapter = new RecruiterJobItemAdapter(jobOffers);
                 recyclerView.setAdapter(adapter);
-                if(jobOffers.size()>0) {
+                if (jobOffers.size() > 0) {
                     Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "No Jobs Found !", Toast.LENGTH_SHORT).show();

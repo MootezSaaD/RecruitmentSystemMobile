@@ -24,22 +24,6 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
     private ArrayList<JobOffer> list;
 
 
-    public static class ApplicantJobViewHolder extends RecyclerView.ViewHolder {
-        public TextView jobTitleTextView;
-        public TextView jobCompanyTextView;
-        public TextView jobEndDateTextView;
-        public Button viewJobButton;
-
-        public ApplicantJobViewHolder(@NonNull View itemView) {
-            super(itemView);
-            jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
-            jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
-            jobEndDateTextView = itemView.findViewById(R.id.appJobEndDate);
-            viewJobButton = itemView.findViewById(R.id.jobDetailsBtn);
-        }
-
-    }
-
     public ApplicantJobAdapter(ArrayList<JobOffer> list) {
         this.list = list;
     }
@@ -84,5 +68,21 @@ public class ApplicantJobAdapter extends RecyclerView.Adapter<ApplicantJobAdapte
     public void addAll(List<JobOffer> list) {
         list.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public static class ApplicantJobViewHolder extends RecyclerView.ViewHolder {
+        public TextView jobTitleTextView;
+        public TextView jobCompanyTextView;
+        public TextView jobEndDateTextView;
+        public Button viewJobButton;
+
+        public ApplicantJobViewHolder(@NonNull View itemView) {
+            super(itemView);
+            jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
+            jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
+            jobEndDateTextView = itemView.findViewById(R.id.appJobEndDate);
+            viewJobButton = itemView.findViewById(R.id.jobDetailsBtn);
+        }
+
     }
 }

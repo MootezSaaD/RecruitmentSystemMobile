@@ -5,31 +5,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+
+import java.util.ArrayList;
 
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Application;
 
 public class ApplicantApplicationAdapter extends RecyclerView.Adapter<ApplicantApplicationAdapter.ApplicantApplicationViewHolder> {
     private ArrayList<Application> list;
-
-    public static class ApplicantApplicationViewHolder extends RecyclerView.ViewHolder {
-        public TextView jobTitleTextView;
-        public TextView jobCompanyTextView;
-        public Chip chipStatus;
-
-        public ApplicantApplicationViewHolder(@NonNull View itemView){
-            super(itemView);
-            jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
-            jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
-            chipStatus = itemView.findViewById(R.id.applicationStatusChip);
-        }
-    }
 
     public ApplicantApplicationAdapter(ArrayList<Application> list) {
         this.list = list;
@@ -56,5 +43,18 @@ public class ApplicantApplicationAdapter extends RecyclerView.Adapter<ApplicantA
     @Override
     public int getItemCount() {
         return this.list.size();
+    }
+
+    public static class ApplicantApplicationViewHolder extends RecyclerView.ViewHolder {
+        public TextView jobTitleTextView;
+        public TextView jobCompanyTextView;
+        public Chip chipStatus;
+
+        public ApplicantApplicationViewHolder(@NonNull View itemView) {
+            super(itemView);
+            jobTitleTextView = itemView.findViewById(R.id.appJobTitle);
+            jobCompanyTextView = itemView.findViewById(R.id.appJobCompany);
+            chipStatus = itemView.findViewById(R.id.applicationStatusChip);
+        }
     }
 }

@@ -48,13 +48,14 @@
                 android:layout_marginTop="4dp"
                 android:text="Status:"
                 android:textStyle="bold" />
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/applicationStatusChip"
                 style="@style/Widget.MaterialComponents.Chip.Action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="STATUS"/>
+                android:text="STATUS" />
 
 
         </LinearLayout>

@@ -3,24 +3,18 @@ package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Degree;
 import tn.medtech.recruitmentsystemapp.api.models.Domain;
@@ -39,7 +33,6 @@ public class ApplicantAddDegree extends AppCompatActivity {
     ArrayList<String> degreeTypes = new ArrayList<>();
     int domainPosition = 0;
     int typePosition = 0;
-
 
 
     @Override
@@ -112,9 +105,10 @@ public class ApplicantAddDegree extends AppCompatActivity {
 
     }
 
-    private void addDegree(Degree degree){
-        DegreeService degreeService = ServiceGenerator.createService(DegreeService.class);
-        Call<Degree> call = degreeService.addDegree("Bearer " + TokenService.getToken(), degree);
+    private void addDegree(Degree degree) {
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        DegreeService degreeService = ServiceGenerator.createServiceWithAuth(DegreeService.class, tokenService);
+        Call<Degree> call = degreeService.addDegree(degree);
         call.enqueue(new Callback<Degree>() {
             @Override
             public void onResponse(Call<Degree> call, Response<Degree> response) {
@@ -129,12 +123,9 @@ public class ApplicantAddDegree extends AppCompatActivity {
     }
 
     private void getDomains() {
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        DomainService domainService = retrofit.create(DomainService.class);
-        Call<List<Domain>> call = domainService.getDomains("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        DomainService domainService = ServiceGenerator.createServiceWithAuth(DomainService.class, tokenService);
+        Call<List<Domain>> call = domainService.getDomains();
         call.enqueue(new Callback<List<Domain>>() {
 
             @Override

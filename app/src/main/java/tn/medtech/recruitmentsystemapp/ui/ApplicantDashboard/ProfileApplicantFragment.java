@@ -1,7 +1,6 @@
 package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,20 +32,20 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
-public class ProfileApplicantFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
+import static android.content.Context.MODE_PRIVATE;
 
+public class ProfileApplicantFragment extends Fragment {
     List<Skill> skillsList;
     ArrayList<Skill> applicantSkills;
     List<Skill> addedSkills;
-
     TextView name;
     TextView phoneNumber;
     AutoCompleteTextView skill1;
     ChipGroup applicantSkillsChipGroup;
     Button updateProfileBtn;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Nullable
     @Override
@@ -80,8 +79,9 @@ public class ProfileApplicantFragment extends Fragment {
     }
 
     private void getSkills() {
-        SkillService skillService = ServiceGenerator.createService(SkillService.class);
-        Call<List<Skill>> call = skillService.getSkills("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        SkillService skillService = ServiceGenerator.createServiceWithAuth(SkillService.class, tokenService);
+        Call<List<Skill>> call = skillService.getSkills();
         call.enqueue(new Callback<List<Skill>>() {
             @Override
             public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
@@ -118,14 +118,14 @@ public class ProfileApplicantFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Throwable", "Exception", t);
             }
         });
     }
 
     private void getApplicantSkills() {
-        SkillService skillService = ServiceGenerator.createService(SkillService.class);
-        Call<List<Skill>> call = skillService.getApplicantSkills("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        SkillService skillService = ServiceGenerator.createServiceWithAuth(SkillService.class, tokenService);
+        Call<List<Skill>> call = skillService.getApplicantSkills();
         call.enqueue(new Callback<List<Skill>>() {
             @Override
             public void onResponse(Call<List<Skill>> call, Response<List<Skill>> response) {
@@ -154,15 +154,14 @@ public class ProfileApplicantFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Throwable", "Exception", t);
             }
         });
     }
 
     public void addSkills(List<Skill> skills) {
-        SkillService skillService = ServiceGenerator.createService(SkillService.class);
-        System.out.println(addedSkills.toString());
-        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = skillService.addSkills("Bearer " + TokenService.getToken(), addedSkills);
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        SkillService skillService = ServiceGenerator.createServiceWithAuth(SkillService.class, tokenService);
+        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = skillService.addSkills(addedSkills);
         call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
             @Override
             public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {

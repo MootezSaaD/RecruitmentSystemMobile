@@ -1,29 +1,42 @@
 package tn.medtech.recruitmentsystemapp.util;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
+
+import tn.medtech.recruitmentsystemapp.api.models.AccessToken;
 
 public class TokenService {
 
-    private static SharedPreferences sharedPreferences;
+    private static TokenService INSTANCE = null;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
-    private TokenService() {
+    private TokenService(SharedPreferences prefs) {
+        this.prefs = prefs;
+        this.editor = prefs.edit();
     }
 
-    public static void init(Context context) {
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
+    public static synchronized TokenService getInstance(SharedPreferences prefs) {
+        if (INSTANCE == null) {
+            INSTANCE = new TokenService(prefs);
         }
+        return INSTANCE;
     }
 
-    public static String getToken() {
-        return sharedPreferences.getString("token", "");
+    public void saveToken(AccessToken token) {
+        editor.putString("ACCESS_TOKEN", token.getAccessToken()).commit();
+        editor.putString("REFRESH_TOKEN", token.getRefreshToken()).commit();
     }
 
-    public static void storeToken(String token) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("token", token);
-        editor.apply();
+    public void deleteToken() {
+        editor.remove("ACCESS_TOKEN").commit();
+        editor.remove("REFRESH_TOKEN").commit();
     }
+
+    public AccessToken getToken() {
+        AccessToken token = new AccessToken();
+        token.setAccessToken(prefs.getString("ACCESS_TOKEN", null));
+        token.setRefreshToken(prefs.getString("REFRESH_TOKEN", null));
+        return token;
+    }
+
 }

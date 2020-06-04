@@ -1,40 +1,23 @@
 package tn.medtech.recruitmentsystemapp.ui.Adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Degree;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
-import tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard.ApplicantJobDetailActivity;
-import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class ApplicantDegreeAdapter extends RecyclerView.Adapter<ApplicantDegreeAdapter.ApplicantDegreeViewHolder> {
 
     private ArrayList<Degree> list;
-
-    public static class ApplicantDegreeViewHolder extends RecyclerView.ViewHolder {
-        public TextView degreeType;
-        public TextView degreeDomain;
-
-        public ApplicantDegreeViewHolder(@NonNull View itemView) {
-            super(itemView);
-            degreeType = itemView.findViewById(R.id.degreeType);
-            degreeDomain = itemView.findViewById(R.id.degreeDomain);
-        }
-
-    }
 
     public ApplicantDegreeAdapter(ArrayList<Degree> list) {
         this.list = list;
@@ -70,5 +53,17 @@ public class ApplicantDegreeAdapter extends RecyclerView.Adapter<ApplicantDegree
     public void addAll(List<JobOffer> list) {
         list.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public static class ApplicantDegreeViewHolder extends RecyclerView.ViewHolder {
+        public TextView degreeType;
+        public TextView degreeDomain;
+
+        public ApplicantDegreeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            degreeType = itemView.findViewById(R.id.degreeType);
+            degreeDomain = itemView.findViewById(R.id.degreeDomain);
+        }
+
     }
 }

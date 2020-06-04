@@ -11,15 +11,15 @@ public class Recruiter extends User implements Serializable {
     private Company company;
 
     public Recruiter(String firstName, String lastName, String email, Company company, String... vars) {
-        super("Recruiter",firstName, lastName, email, vars);
-        this.company = company;
-    }
-
-    public void setCompany(Company company) {
+        super("Recruiter", firstName, lastName, email, vars);
         this.company = company;
     }
 
     public Company getCompany() {
         return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

@@ -7,17 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,16 +29,15 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.ui.Adapters.ApplicantDegreeAdapter;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class DegreeListFragment extends Fragment {
+    ArrayList<Degree> degreeList = new ArrayList<>();
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
     private FloatingActionButton addDegreeBtn;
-    ArrayList<Degree> degreeList = new ArrayList<>();
-
-
 
     @Nullable
     @Override
@@ -77,8 +77,9 @@ public class DegreeListFragment extends Fragment {
 
     private void getDegrees() {
         swipeContainer.setRefreshing(true);
-        DegreeService degreeService = ServiceGenerator.createService(DegreeService.class);
-        Call<List<Degree>> call = degreeService.getDegrees("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        DegreeService degreeService = ServiceGenerator.createServiceWithAuth(DegreeService.class, tokenService);
+        Call<List<Degree>> call = degreeService.getDegrees();
         call.enqueue(new Callback<List<Degree>>() {
             @Override
             public void onResponse(Call<List<Degree>> call, Response<List<Degree>> response) {

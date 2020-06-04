@@ -1,9 +1,9 @@
 package tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +29,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Domain;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
@@ -127,8 +125,9 @@ public class CreateJobFragment extends Fragment {
     }
 
     private void getSkills() {
-        SkillService skillService = ServiceGenerator.createService(SkillService.class);
-        Call<List<Skill>> call = skillService.getSkills("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
+        SkillService skillService = ServiceGenerator.createServiceWithAuth(SkillService.class, tokenService);
+        Call<List<Skill>> call = skillService.getSkills();
         call.enqueue(new Callback<List<Skill>>() {
 
             @Override
@@ -164,7 +163,6 @@ public class CreateJobFragment extends Fragment {
                                 }
                             }
                         });
-                        Log.d("Skill Selected", skill.toString());
                         requiredSkillsChipGroup.addView(skillChip);
                         // Adding skills to the job offer's skill arrayList
                         applicationSkills.add(skill);
@@ -213,12 +211,9 @@ public class CreateJobFragment extends Fragment {
     }
 
     private void getDomains() {
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        DomainService domainService = retrofit.create(DomainService.class);
-        Call<List<Domain>> call = domainService.getDomains("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
+        DomainService domainService = ServiceGenerator.createServiceWithAuth(DomainService.class, tokenService);
+        Call<List<Domain>> call = domainService.getDomains();
         call.enqueue(new Callback<List<Domain>>() {
 
             @Override
@@ -240,16 +235,12 @@ public class CreateJobFragment extends Fragment {
     }
 
     public void addJobOfferRequest(JobOffer jobOffer) {
-        // Usual drill..
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        JobService jobService = retrofit.create(JobService.class);
-        Call<JobOffer> call = jobService.createJob("Bearer " + TokenService.getToken(), jobOffer);
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+
+        Call<JobOffer> call = jobService.createJob(jobOffer);
         // FOR TESTING PURPOSES
         String gson = new Gson().toJson(jobOffer);
-        Log.d("Rec", gson);
         call.enqueue(new Callback<JobOffer>() {
             @Override
             public void onResponse(Call<JobOffer> call, Response<JobOffer> response) {

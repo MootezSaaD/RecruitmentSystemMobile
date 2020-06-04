@@ -54,7 +54,7 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
         description.setText(jobOffer.getDescription());
         endDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
         startDate.setText(DateParser.parseDate(jobOffer.getStartDate()));
-        for(Skill skill: jobOffer.getSkills()) {
+        for (Skill skill : jobOffer.getSkills()) {
             Chip skillChip = new Chip(this);
             skillChip.setText(skill.toString());
             jobSkillsChipGroup.addView(skillChip);
@@ -72,8 +72,9 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
     }
 
     public void applyForJob(int jobID) {
-        JobService jobService = ServiceGenerator.createService(JobService.class);
-        Call<Response> call = jobService.applyForJob("Bearer " + TokenService.getToken(), jobID);
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+        Call<Response> call = jobService.applyForJob(jobID);
         call.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {

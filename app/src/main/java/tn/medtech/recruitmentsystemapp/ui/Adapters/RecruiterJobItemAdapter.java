@@ -22,19 +22,6 @@ import tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard.RecruiterJobOfferDe
 public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobItemAdapter.RecruiterJobViewHolder> {
     private ArrayList<JobOffer> list;
 
-    public static class RecruiterJobViewHolder extends RecyclerView.ViewHolder {
-        public TextView jobTitleTextView;
-        public TextView jobCompanyTextView;
-        public Button viewJobButton;
-
-        public RecruiterJobViewHolder(@NonNull View itemView) {
-            super(itemView);
-            jobTitleTextView = itemView.findViewById(R.id.recJobOfferTitle);
-            jobCompanyTextView = itemView.findViewById(R.id.recJobOfferCompany);
-            viewJobButton = itemView.findViewById(R.id.recJobViewBtn);
-        }
-    }
-
     public RecruiterJobItemAdapter(ArrayList<JobOffer> list) {
         this.list = list;
     }
@@ -77,5 +64,18 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
     public void addAll(List<JobOffer> list) {
         list.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public static class RecruiterJobViewHolder extends RecyclerView.ViewHolder {
+        public TextView jobTitleTextView;
+        public TextView jobCompanyTextView;
+        public Button viewJobButton;
+
+        public RecruiterJobViewHolder(@NonNull View itemView) {
+            super(itemView);
+            jobTitleTextView = itemView.findViewById(R.id.recJobOfferTitle);
+            jobCompanyTextView = itemView.findViewById(R.id.recJobOfferCompany);
+            viewJobButton = itemView.findViewById(R.id.recJobViewBtn);
+        }
     }
 }

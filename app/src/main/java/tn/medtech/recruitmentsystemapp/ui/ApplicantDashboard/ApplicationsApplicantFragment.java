@@ -1,14 +1,10 @@
 package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,12 +26,14 @@ import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.ui.Adapters.ApplicantApplicationAdapter;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class ApplicationsApplicantFragment extends Fragment {
+    ArrayList<Application> applicationList = new ArrayList<>();
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    ArrayList<Application> applicationList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -63,14 +64,14 @@ public class ApplicationsApplicantFragment extends Fragment {
 
     private void getMyApplications() {
         swipeContainer.setRefreshing(true);
-        JobService jobService = ServiceGenerator.createService(JobService.class);
-        Call<List<Application>> call = jobService.getApplications("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+        Call<List<Application>> call = jobService.getApplications();
         call.enqueue(new Callback<List<Application>>() {
             @Override
             public void onResponse(Call<List<Application>> call, Response<List<Application>> response) {
                 swipeContainer.setRefreshing(false);
                 applicationList = new ArrayList<>(response.body());
-                Log.d("AppList", applicationList.toString());
                 adapter = new ApplicantApplicationAdapter(applicationList);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);

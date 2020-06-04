@@ -17,8 +17,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Domain;
 import tn.medtech.recruitmentsystemapp.api.models.WorkExperience;
@@ -97,12 +95,9 @@ public class ApplicantAddWorkExperience extends AppCompatActivity {
     }
 
     private void getDomains() {
-        Retrofit.Builder retroBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = retroBuilder.build();
-        DomainService domainService = retrofit.create(DomainService.class);
-        Call<List<Domain>> call = domainService.getDomains("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        DomainService domainService = ServiceGenerator.createServiceWithAuth(DomainService.class, tokenService);
+        Call<List<Domain>> call = domainService.getDomains();
         call.enqueue(new Callback<List<Domain>>() {
 
             @Override
@@ -124,8 +119,9 @@ public class ApplicantAddWorkExperience extends AppCompatActivity {
     }
 
     public void addWorkExperience(WorkExperience workExperience) {
-        WorkExperienceService workExperienceService = ServiceGenerator.createService(WorkExperienceService.class);
-        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = workExperienceService.addWorkExperience("Bearer " + TokenService.getToken(), workExperience);
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        WorkExperienceService workExperienceService = ServiceGenerator.createServiceWithAuth(WorkExperienceService.class, tokenService);
+        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = workExperienceService.addWorkExperience(workExperience);
         call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
             @Override
             public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {

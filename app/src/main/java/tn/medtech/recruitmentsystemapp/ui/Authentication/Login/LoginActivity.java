@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tn.medtech.recruitmentsystemapp.R;
+import tn.medtech.recruitmentsystemapp.api.models.AccessToken;
 import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.UserClient;
@@ -69,7 +70,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendLoginRequest(User user) {
+        TokenService tokenService = TokenService.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
         UserClient userClient = ServiceGenerator.createService(UserClient.class);
+
         // Perform the login request
         Call<User> call = userClient.login(user);
         call.enqueue(new Callback<User>() {
@@ -81,8 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                     // Just testing
                     //Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
                     // Store the JWT in SharedPreferences
-                    TokenService.init(getApplicationContext());
-                    TokenService.storeToken(response.body().getJwtToken());
+                    AccessToken accessToken = new AccessToken();
+                    accessToken.setAccessToken(response.body().getAccessToken());
+                    accessToken.setRefreshToken(response.body().getRefreshToken());
+                    tokenService.saveToken(accessToken);
                     // Redirect depending on the response, i.e. the user's role (Applicant or Recuiter).
                     // Redirecting to a dummy activity to test the JWT service
                     if (response.body().getUserType().equalsIgnoreCase("applicant"))

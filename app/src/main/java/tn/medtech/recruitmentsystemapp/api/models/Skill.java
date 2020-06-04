@@ -30,8 +30,16 @@ public class Skill implements Serializable {
         return skillName;
     }
 
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
     public String getSkillType() {
         return skillType;
+    }
+
+    public void setSkillType(String skillType) {
+        this.skillType = skillType;
     }
 
     public int getId() {
@@ -42,18 +50,10 @@ public class Skill implements Serializable {
         this.id = id;
     }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
-    }
-
-    public void setSkillType(String skillType) {
-        this.skillType = skillType;
-    }
-
     @Override
     public String toString() {
-        if(skillType != null) {
-            return skillName +" (" +skillType+" )";
+        if (skillType != null) {
+            return skillName + " (" + skillType + " )";
         }
         return skillName;
     }

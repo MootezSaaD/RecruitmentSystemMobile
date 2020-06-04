@@ -17,24 +17,6 @@ import tn.medtech.recruitmentsystemapp.util.DateParser;
 public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAdapter.WorkExperienceViewHolder> {
     private ArrayList<WorkExperience> list;
 
-    public static class WorkExperienceViewHolder extends RecyclerView.ViewHolder {
-        public TextView workExpTitle;
-        public TextView workExpCompany;
-        public TextView workExpDomain;
-        public TextView workExpStartDate;
-        public TextView workExpEndDate;
-
-
-        public WorkExperienceViewHolder(@NonNull View itemView) {
-            super(itemView);
-            workExpTitle = itemView.findViewById(R.id.wexpJobTitle);
-            workExpCompany = itemView.findViewById(R.id.wexpJobCompany);
-            workExpDomain = itemView.findViewById(R.id.wexpDomain);
-            workExpStartDate = itemView.findViewById(R.id.wexpStartDate);
-            workExpEndDate = itemView.findViewById(R.id.wexpEndDate);
-        }
-    }
-
     public WorkExperienceAdapter(ArrayList<WorkExperience> list) {
         this.list = list;
     }
@@ -60,5 +42,23 @@ public class WorkExperienceAdapter extends RecyclerView.Adapter<WorkExperienceAd
     @Override
     public int getItemCount() {
         return this.list.size();
+    }
+
+    public static class WorkExperienceViewHolder extends RecyclerView.ViewHolder {
+        public TextView workExpTitle;
+        public TextView workExpCompany;
+        public TextView workExpDomain;
+        public TextView workExpStartDate;
+        public TextView workExpEndDate;
+
+
+        public WorkExperienceViewHolder(@NonNull View itemView) {
+            super(itemView);
+            workExpTitle = itemView.findViewById(R.id.wexpJobTitle);
+            workExpCompany = itemView.findViewById(R.id.wexpJobCompany);
+            workExpDomain = itemView.findViewById(R.id.wexpDomain);
+            workExpStartDate = itemView.findViewById(R.id.wexpStartDate);
+            workExpEndDate = itemView.findViewById(R.id.wexpEndDate);
+        }
     }
 }

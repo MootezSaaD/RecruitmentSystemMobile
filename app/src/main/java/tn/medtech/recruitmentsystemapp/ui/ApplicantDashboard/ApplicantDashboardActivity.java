@@ -2,7 +2,6 @@ package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -36,7 +35,6 @@ public class ApplicantDashboardActivity extends AppCompatActivity {
         Intent intent = getIntent();
         applicant = new Gson().fromJson(intent.getStringExtra("applicantObject"), User.class);
         setContentView(R.layout.activity_applicant_dashboard);
-        Log.d("Recruiter From Dash", applicant.toString());
         toolbar = findViewById(R.id.appToolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.appDrawerLayout);

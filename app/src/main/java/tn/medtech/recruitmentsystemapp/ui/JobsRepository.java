@@ -7,19 +7,18 @@ import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 
 public class JobsRepository {
 
+    private static JobsRepository repository = null;
     private List<JobOffer> jobOffers = new ArrayList<>();
     private boolean loaded = false;
 
-    private static JobsRepository repository = null;
+    private JobsRepository() {
+    }
 
     public static JobsRepository getInstance() {
         if (repository == null) {
             repository = new JobsRepository();
         }
         return repository;
-    }
-
-    private JobsRepository() {
     }
 
     ;

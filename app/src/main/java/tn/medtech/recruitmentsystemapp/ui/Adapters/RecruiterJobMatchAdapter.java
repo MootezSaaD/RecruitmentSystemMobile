@@ -5,41 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.SelectedApplicant;
 import tn.medtech.recruitmentsystemapp.util.DateParser;
 
 public class RecruiterJobMatchAdapter extends RecyclerView.Adapter<RecruiterJobMatchAdapter.JobMatchViewHolder> {
     private ArrayList<SelectedApplicant> list;
-
-    public static class JobMatchViewHolder extends RecyclerView.ViewHolder {
-        public TextView jobMatchTitle;
-        public TextView jobMatchDescription;
-        public TextView jobMatchStartDate;
-        public TextView jobMatchEndDate;
-        public TextView jobMatchFirstName;
-        public TextView jobMatchLastName;
-        public TextView jobMatchEmail;
-        public TextView jobMatchPhoneNumber;
-
-
-        public JobMatchViewHolder(@NonNull View itemView) {
-            super(itemView);
-            jobMatchTitle = itemView.findViewById(R.id.jobMatchTitle);
-            jobMatchDescription = itemView.findViewById(R.id.jobMatchDescription);
-            jobMatchStartDate = itemView.findViewById(R.id.jobMatchStartDate);
-            jobMatchEndDate = itemView.findViewById(R.id.jobMatchEndDate);
-            jobMatchFirstName = itemView.findViewById(R.id.jobMatchFirstName);
-            jobMatchLastName = itemView.findViewById(R.id.jobMatchLastName);
-            jobMatchEmail = itemView.findViewById(R.id.jobMatchEmail);
-            jobMatchPhoneNumber = itemView.findViewById(R.id.jobMatchPhoneNumber);
-
-        }
-    }
 
     public RecruiterJobMatchAdapter(ArrayList<SelectedApplicant> list) {
         this.list = list;
@@ -69,5 +45,30 @@ public class RecruiterJobMatchAdapter extends RecyclerView.Adapter<RecruiterJobM
     @Override
     public int getItemCount() {
         return this.list.size();
+    }
+
+    public static class JobMatchViewHolder extends RecyclerView.ViewHolder {
+        public TextView jobMatchTitle;
+        public TextView jobMatchDescription;
+        public TextView jobMatchStartDate;
+        public TextView jobMatchEndDate;
+        public TextView jobMatchFirstName;
+        public TextView jobMatchLastName;
+        public TextView jobMatchEmail;
+        public TextView jobMatchPhoneNumber;
+
+
+        public JobMatchViewHolder(@NonNull View itemView) {
+            super(itemView);
+            jobMatchTitle = itemView.findViewById(R.id.jobMatchTitle);
+            jobMatchDescription = itemView.findViewById(R.id.jobMatchDescription);
+            jobMatchStartDate = itemView.findViewById(R.id.jobMatchStartDate);
+            jobMatchEndDate = itemView.findViewById(R.id.jobMatchEndDate);
+            jobMatchFirstName = itemView.findViewById(R.id.jobMatchFirstName);
+            jobMatchLastName = itemView.findViewById(R.id.jobMatchLastName);
+            jobMatchEmail = itemView.findViewById(R.id.jobMatchEmail);
+            jobMatchPhoneNumber = itemView.findViewById(R.id.jobMatchPhoneNumber);
+
+        }
     }
 }

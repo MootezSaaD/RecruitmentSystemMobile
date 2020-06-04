@@ -27,12 +27,14 @@ import tn.medtech.recruitmentsystemapp.ui.Adapters.ApplicantJobAdapter;
 import tn.medtech.recruitmentsystemapp.ui.JobsRepository;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class JobsApplicantFragment extends Fragment {
+    ArrayList<JobOffer> jobList;
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    ArrayList<JobOffer> jobList;
     private JobsRepository jobsRepository = JobsRepository.getInstance();
 
     @Nullable
@@ -70,8 +72,9 @@ public class JobsApplicantFragment extends Fragment {
 
     private void getJobs() {
         swipeContainer.setRefreshing(true);
-        JobService jobService = ServiceGenerator.createService(JobService.class);
-        Call<List<JobOffer>> call = jobService.getJobs("Bearer " + TokenService.getToken());
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+        Call<List<JobOffer>> call = jobService.getJobs();
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
             public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {
