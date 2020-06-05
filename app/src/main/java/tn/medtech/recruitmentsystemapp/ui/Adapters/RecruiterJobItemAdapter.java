@@ -21,6 +21,15 @@ import tn.medtech.recruitmentsystemapp.ui.RecruiterDashboard.RecruiterJobOfferDe
 
 public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobItemAdapter.RecruiterJobViewHolder> {
     private ArrayList<JobOffer> list;
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        onItemClickListener = listener;
+    }
 
     public RecruiterJobItemAdapter(ArrayList<JobOffer> list) {
         this.list = list;
@@ -30,7 +39,7 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
     @Override
     public RecruiterJobViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recruiter_job_card, parent, false);
-        RecruiterJobViewHolder rjvh = new RecruiterJobViewHolder(v);
+        RecruiterJobViewHolder rjvh = new RecruiterJobViewHolder(v, onItemClickListener);
         return rjvh;
     }
 
@@ -70,12 +79,29 @@ public class RecruiterJobItemAdapter extends RecyclerView.Adapter<RecruiterJobIt
         public TextView jobTitleTextView;
         public TextView jobCompanyTextView;
         public Button viewJobButton;
+        public Button deleteJobButton;
 
-        public RecruiterJobViewHolder(@NonNull View itemView) {
+        public RecruiterJobViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             jobTitleTextView = itemView.findViewById(R.id.recJobOfferTitle);
             jobCompanyTextView = itemView.findViewById(R.id.recJobOfferCompany);
             viewJobButton = itemView.findViewById(R.id.recJobViewBtn);
+            deleteJobButton = itemView.findViewById(R.id.recJobDeleteBtn);
+
+            deleteJobButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
+
+
         }
     }
 }

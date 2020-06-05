@@ -32,7 +32,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class ListRecruiterJobsFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private RecruiterJobItemAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<JobOffer> jobOffers;
     private JobsRepository jobsRepository = JobsRepository.getInstance();
@@ -84,7 +84,17 @@ public class ListRecruiterJobsFragment extends Fragment {
                 jobsRepository.addAll(response.body());
                 jobOffers = new ArrayList<>(response.body());
                 adapter = new RecruiterJobItemAdapter(jobOffers);
+                adapter.setOnItemClickListener(new RecruiterJobItemAdapter.OnItemClickListener() {
+                    @Override
+                    public void onDeleteClick(int position) {
+                        JobOffer deleteJobOffer = jobOffers.get(position);
+                        removeItem(position);
+                        // Remove it from the database
+                        removeJobOffer(deleteJobOffer.getId());
+                    }
+                });
                 recyclerView.setAdapter(adapter);
+
                 if (jobOffers.size() > 0) {
                     Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
                 } else {
@@ -101,5 +111,28 @@ public class ListRecruiterJobsFragment extends Fragment {
             }
         });
 
+    }
+
+    public void removeItem(int position) {
+        jobOffers.remove(position);
+        adapter.notifyItemRemoved(position);
+    }
+
+    public void removeJobOffer(int jobOfferID) {
+        TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
+        JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
+        Call<tn.medtech.recruitmentsystemapp.api.models.Response> call = jobService.deleteJob(jobOfferID);
+        call.enqueue(new Callback<tn.medtech.recruitmentsystemapp.api.models.Response>() {
+            @Override
+            public void onResponse(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Response<tn.medtech.recruitmentsystemapp.api.models.Response> response) {
+                Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }
