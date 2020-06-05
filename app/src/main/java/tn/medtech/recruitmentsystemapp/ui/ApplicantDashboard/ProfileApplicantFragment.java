@@ -1,5 +1,6 @@
 package tn.medtech.recruitmentsystemapp.ui.ApplicantDashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
+import tn.medtech.recruitmentsystemapp.api.models.User;
 import tn.medtech.recruitmentsystemapp.api.services.ServiceGenerator;
 import tn.medtech.recruitmentsystemapp.api.services.SkillService;
 import tn.medtech.recruitmentsystemapp.util.TokenService;
@@ -43,6 +46,7 @@ public class ProfileApplicantFragment extends Fragment {
     AutoCompleteTextView skill1;
     ChipGroup applicantSkillsChipGroup;
     Button updateProfileBtn;
+    User applicant;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -57,6 +61,7 @@ public class ProfileApplicantFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        applicant = new Gson().fromJson(getActivity().getIntent().getStringExtra("applicantObject"), User.class);
         getApplicantSkills();
         getSkills();
         addedSkills = new ArrayList<>();
@@ -66,6 +71,15 @@ public class ProfileApplicantFragment extends Fragment {
         skill1 = v.findViewById(R.id.profileSkill1);
         updateProfileBtn = v.findViewById(R.id.updateProfileBtn);
         applicantSkillsChipGroup = v.findViewById(R.id.applicantSkillsChipGroup);
+
+        name.setText(applicant.getFirstName()+" "+applicant.getLastName());
+        phoneNumber.setText(applicant.getPhoneNumber());
+
+        name.setEnabled(false);
+        name.setFocusable(false);
+
+        phoneNumber.setEnabled(false);
+        phoneNumber.setFocusable(false);
 
         updateProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override

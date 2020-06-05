@@ -29,6 +29,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/applicantNameFld"
+                    android:textColor="@color/disabled_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -40,10 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Phone"
-                app:startIconDrawable="@drawable/ic_description">
+                app:startIconDrawable="@drawable/ic_phone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/applicantPhoneFld"
+                    android:textColor="@color/disabled_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
