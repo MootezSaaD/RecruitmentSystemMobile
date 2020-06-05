@@ -87,14 +87,14 @@ public class WorkExperienceFragment extends Fragment {
                 adapter = new WorkExperienceAdapter(workexpList);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Work Experiences Loaded !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Work experiences loaded!", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Call<List<WorkExperience>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 

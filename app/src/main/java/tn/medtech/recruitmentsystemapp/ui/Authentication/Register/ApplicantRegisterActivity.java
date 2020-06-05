@@ -58,7 +58,7 @@ public class ApplicantRegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
-                Toast.makeText(ApplicantRegisterActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantRegisterActivity.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });

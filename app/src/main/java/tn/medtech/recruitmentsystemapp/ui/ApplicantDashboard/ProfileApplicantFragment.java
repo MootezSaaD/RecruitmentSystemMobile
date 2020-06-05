@@ -121,7 +121,7 @@ public class ProfileApplicantFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -157,7 +157,7 @@ public class ProfileApplicantFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -174,7 +174,7 @@ public class ProfileApplicantFragment extends Fragment {
 
             @Override
             public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 

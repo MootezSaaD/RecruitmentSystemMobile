@@ -75,13 +75,13 @@ public class ApplicationsApplicantFragment extends Fragment {
                 adapter = new ApplicantApplicationAdapter(applicationList);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Applications Loaded !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Applications loaded!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<Application>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 

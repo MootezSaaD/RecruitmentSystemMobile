@@ -78,13 +78,13 @@ public class RecruiterMatchJobsFragment extends Fragment {
                 adapter = new RecruiterJobMatchAdapter(selectedApplicantsList);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Jobs Matched!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Jobs matched!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<SelectedApplicant>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 

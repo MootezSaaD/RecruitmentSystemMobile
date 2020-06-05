@@ -113,7 +113,7 @@ public class ApplicantAddWorkExperience extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Domain>> call, Throwable t) {
-                Toast.makeText(ApplicantAddWorkExperience.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantAddWorkExperience.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -130,7 +130,7 @@ public class ApplicantAddWorkExperience extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
-                Toast.makeText(ApplicantAddWorkExperience.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantAddWorkExperience.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }

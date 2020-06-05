@@ -36,6 +36,7 @@ public class ListRecruiterJobsFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<JobOffer> jobOffers;
     private JobsRepository jobsRepository = JobsRepository.getInstance();
+    private boolean isLoaded = false;
 
     @Nullable
     @Override
@@ -53,7 +54,9 @@ public class ListRecruiterJobsFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getAllJobs();
+                if (!isLoaded) {
+                    getAllJobs();
+                }
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -94,11 +97,11 @@ public class ListRecruiterJobsFragment extends Fragment {
                     }
                 });
                 recyclerView.setAdapter(adapter);
-
+                isLoaded = true;
                 if (jobOffers.size() > 0) {
-                    Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Jobs loaded!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getActivity(), "No Jobs Found !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No jobs found!", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -107,7 +110,7 @@ public class ListRecruiterJobsFragment extends Fragment {
             @Override
             public void onFailure(Call<List<JobOffer>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -130,7 +133,7 @@ public class ListRecruiterJobsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<tn.medtech.recruitmentsystemapp.api.models.Response> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
 
             }
         });

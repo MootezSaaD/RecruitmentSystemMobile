@@ -205,7 +205,7 @@ public class CreateJobFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Skill>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -229,7 +229,7 @@ public class CreateJobFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Domain>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -244,12 +244,12 @@ public class CreateJobFragment extends Fragment {
         call.enqueue(new Callback<JobOffer>() {
             @Override
             public void onResponse(Call<JobOffer> call, Response<JobOffer> response) {
-                Toast.makeText(getActivity(), "Job Offer Posted !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Job offer posted!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<JobOffer> call, Throwable t) {
-                Toast.makeText(getActivity(), "Unexpected error !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });

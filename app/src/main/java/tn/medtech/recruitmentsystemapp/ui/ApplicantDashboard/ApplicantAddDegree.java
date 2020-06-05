@@ -112,12 +112,12 @@ public class ApplicantAddDegree extends AppCompatActivity {
         call.enqueue(new Callback<Degree>() {
             @Override
             public void onResponse(Call<Degree> call, Response<Degree> response) {
-                Toast.makeText(ApplicantAddDegree.this, "Degree Added!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantAddDegree.this, "Degree added!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Degree> call, Throwable t) {
-                Toast.makeText(ApplicantAddDegree.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantAddDegree.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -138,7 +138,7 @@ public class ApplicantAddDegree extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Domain>> call, Throwable t) {
-                Toast.makeText(ApplicantAddDegree.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantAddDegree.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }

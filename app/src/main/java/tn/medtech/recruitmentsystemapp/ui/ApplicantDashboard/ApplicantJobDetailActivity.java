@@ -85,7 +85,7 @@ public class ApplicantJobDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-                Toast.makeText(ApplicantJobDetailActivity.this, "Something went wrong.. !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicantJobDetailActivity.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -83,13 +83,13 @@ public class JobsApplicantFragment extends Fragment {
                 jobList = new ArrayList<>(response.body());
                 adapter = new ApplicantJobAdapter(jobList);
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Jobs loaded !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Jobs loaded!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<JobOffer>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }

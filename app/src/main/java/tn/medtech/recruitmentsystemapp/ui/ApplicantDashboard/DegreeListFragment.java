@@ -93,7 +93,7 @@ public class DegreeListFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Degree>> call, Throwable t) {
                 swipeContainer.setRefreshing(false);
-                Toast.makeText(getActivity(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 

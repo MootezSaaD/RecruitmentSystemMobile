@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 400) {
-                    Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Wrong credentials!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Just testing
                     //Toast.makeText(LoginActivity.this, "Name :"+response.body().getFirstName(), Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Unexpected error !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
