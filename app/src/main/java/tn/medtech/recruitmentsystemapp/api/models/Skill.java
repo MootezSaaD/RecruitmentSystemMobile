@@ -53,7 +53,7 @@ public class Skill implements Serializable {
     @Override
     public String toString() {
         if (skillType != null) {
-            return skillName + " (" + skillType + " )";
+            return skillName + " (" + skillType + ")";
         }
         return skillName;
     }

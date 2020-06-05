@@ -10,6 +10,8 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 import tn.medtech.recruitmentsystemapp.R;
 import tn.medtech.recruitmentsystemapp.api.models.JobOffer;
 import tn.medtech.recruitmentsystemapp.api.models.Skill;
@@ -27,7 +29,7 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiter_job_offer_details);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         JobOffer jobOffer = new Gson().fromJson(intent.getStringExtra("jobOfferObject"), JobOffer.class);
         setTitle(jobOffer.getTitle());
@@ -50,7 +52,11 @@ public class RecruiterJobOfferDetailsActivity extends AppCompatActivity {
             skillChip.setText(skill.toString());
             jobSkillsChipGroup.addView(skillChip);
         }
+    }
 
-
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
