@@ -74,7 +74,7 @@ public class JobsApplicantFragment extends Fragment {
         swipeContainer.setRefreshing(true);
         TokenService tokenService = TokenService.getInstance(this.getActivity().getSharedPreferences("prefs", MODE_PRIVATE));
         JobService jobService = ServiceGenerator.createServiceWithAuth(JobService.class, tokenService);
-        Call<List<JobOffer>> call = jobService.getJobs();
+        Call<List<JobOffer>> call = jobService.getAllJobs();
         call.enqueue(new Callback<List<JobOffer>>() {
             @Override
             public void onResponse(Call<List<JobOffer>> call, Response<List<JobOffer>> response) {

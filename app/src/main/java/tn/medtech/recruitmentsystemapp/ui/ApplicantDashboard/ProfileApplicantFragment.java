@@ -58,11 +58,8 @@ public class ProfileApplicantFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getApplicantSkills();
-
-
         getSkills();
         addedSkills = new ArrayList<>();
-
         View v = getView();
         name = v.findViewById(R.id.applicantNameFld);
         phoneNumber = v.findViewById(R.id.applicantPhoneFld);
@@ -96,6 +93,13 @@ public class ProfileApplicantFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Chip skillChip = new Chip(getActivity());
                         Skill skill = (Skill) parent.getItemAtPosition(position);
+                        Iterator<Skill> iterator = addedSkills.iterator();
+                        while (iterator.hasNext()) {
+                            if (iterator.next().toString().toLowerCase().equals(skill.toString().toLowerCase())) {
+                                Toast.makeText(getActivity(), "Skills Already Exists", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
                         skillChip.setText(skill.toString());
                         skillChip.setCloseIconVisible(true);
                         skillChip.setOnCloseIconClickListener(new View.OnClickListener() {

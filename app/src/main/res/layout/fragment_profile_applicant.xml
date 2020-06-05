@@ -86,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:completionThreshold="1"
-                            android:hint="Skill 1" />
+                            android:hint="Skills" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 

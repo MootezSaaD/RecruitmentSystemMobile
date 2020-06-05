@@ -22,6 +22,9 @@ public interface JobService {
     @GET("recruiters/jobs")
     Call<List<JobOffer>> getJobs();
 
+    @GET("jobs/")
+    Call<List<JobOffer>> getAllJobs();
+
     @DELETE("jobs/{jobID}")
     Call<Response>  deleteJob(@Path("jobID") int jobID);
 
